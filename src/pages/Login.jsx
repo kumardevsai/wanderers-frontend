@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import styles from './Login.css';
-
 @inject('WanderersStore')
 @observer
 export default class Login extends Component {
@@ -17,11 +15,11 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className={styles.login_container}>
+      <div className="login_container">
         <h2>Login</h2>
 
         <form onSubmit={e => this.submitForm(e)}>
-          <div className={styles.input_wrapper}>
+          <div className="input-wrapper">
             <label htmlFor="email" className="input-label">
               Email
             </label>
@@ -35,7 +33,7 @@ export default class Login extends Component {
             />
           </div>
 
-          <div className={styles.input_wrapper}>
+          <div className="input-wrapper">
             <label htmlFor="password" className="input-label">
               Password
             </label>
@@ -49,7 +47,7 @@ export default class Login extends Component {
             />
           </div>
 
-          <div className={styles.input_wrapper}>
+          <div className="input-container">
             <button type="submit">LOGIN</button>
             <button>CANCEL</button>
           </div>
