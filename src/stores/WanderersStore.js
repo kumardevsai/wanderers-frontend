@@ -14,6 +14,13 @@ class WanderersStore {
 
     this.user = response.data;
   };
+
+  @action
+  signup = async (name, email, password, image) => {
+    const response = await this.authApi.signup(name, email, password, image);
+
+    this.user = response.data;
+  };
 }
 
 const singleton = new WanderersStore();

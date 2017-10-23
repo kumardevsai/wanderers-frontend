@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react';
 
 import WanderersStore from './stores/WanderersStore';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 import './App.css';
 
@@ -15,6 +16,7 @@ class App extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
             </Switch>
           </BrowserRouter>
         </div>
