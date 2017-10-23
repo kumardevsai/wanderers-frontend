@@ -6,6 +6,12 @@ class WanderersStore {
 
   constructor() {
     this.authApi = new AuthApi();
+
+    // ensure that there is a user & load user into state (makes it available in store)
+    const session_user = sessionStorage.getItem('user');
+    if (session_user) {
+      this.user = JSON.parse(session_user);
+    }
   }
 
   @action
@@ -13,6 +19,7 @@ class WanderersStore {
     const response = await this.authApi.login(email, password);
 
     this.user = response.data;
+    sessionStorage.setItem('user', JSON.stringify(this.user));
   };
 
   @action
@@ -20,6 +27,7 @@ class WanderersStore {
     const response = await this.authApi.signup(name, email, password, image);
 
     this.user = response.data;
+    sessionStorage.setItem('user', JSON.stringify(this.user));
   };
 }
 
