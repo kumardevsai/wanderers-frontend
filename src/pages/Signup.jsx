@@ -11,7 +11,7 @@ export default class Signup extends Component {
       this.nameInput.value,
       this.emailInput.value,
       this.passwordInput.value,
-      this.imageInput.value
+      this.imageInput.files[0]
     );
   };
 
@@ -55,7 +55,7 @@ export default class Signup extends Component {
             </label>
             <input
               ref={input => (this.passwordInput = input)}
-              type="text"
+              type="password"
               className="password-field"
               name="password"
               id="password"
