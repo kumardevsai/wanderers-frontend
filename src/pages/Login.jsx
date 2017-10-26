@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
+import { Input } from '../elements/form';
+
 @inject('WanderersStore')
 @observer
 export default class Login extends Component {
@@ -23,7 +25,7 @@ export default class Login extends Component {
             <label htmlFor="email" className="input-label">
               Email
             </label>
-            <input
+            <Input
               ref={input => (this.emailInput = input)}
               type="email"
               className="input-field"
@@ -37,7 +39,7 @@ export default class Login extends Component {
             <label htmlFor="password" className="input-label">
               Password
             </label>
-            <input
+            <Input
               ref={input => (this.passwordInput = input)}
               type="password"
               className="input-field"
