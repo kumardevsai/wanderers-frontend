@@ -3,6 +3,14 @@ import AuthApi from '../services/AuthApi';
 
 class WanderersStore {
   @observable user = {};
+  @observable
+  viewport = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+    latitude: 43.65323,
+    longitude: -79.38318,
+    zoom: 12
+  };
 
   constructor() {
     this.authApi = new AuthApi();
