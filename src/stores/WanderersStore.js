@@ -1,8 +1,10 @@
 import { observable, action } from 'mobx';
 import AuthApi from '../services/AuthApi';
+import PlacesApi from '../services/PlacesApi';
 
 class WanderersStore {
   @observable user = {};
+
   @observable
   viewport = {
     width: window.innerWidth,
@@ -12,8 +14,11 @@ class WanderersStore {
     zoom: 12
   };
 
+  @observable places = [];
+
   constructor() {
     this.authApi = new AuthApi();
+    this.placesApi = new PlacesApi();
 
     // ensure that there is a user & load user into state (makes it available in store)
     const session_user = sessionStorage.getItem('user');
@@ -36,6 +41,13 @@ class WanderersStore {
 
     this.user = response.data;
     sessionStorage.setItem('user', JSON.stringify(this.user));
+  };
+
+  @action
+  searchPlaces = async (lat, lon) => {
+    const response = await this.placesApi.search('abc', lat, lon);
+
+    this.places = response.data;
   };
 }
 
