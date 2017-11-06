@@ -45,6 +45,9 @@ class WanderersStore {
 
   @action
   searchPlaces = async (lat, lon) => {
+    this.viewport.latitude = lat;
+    this.viewport.longitude = lon;
+
     const response = await this.placesApi.search('abc', lat, lon);
 
     this.places = response.data;
