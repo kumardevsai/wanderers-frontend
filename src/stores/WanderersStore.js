@@ -11,8 +11,10 @@ class WanderersStore {
     height: window.innerHeight,
     latitude: 43.65323,
     longitude: -79.38318,
-    zoom: 12
+    zoom: 13
   };
+
+  @observable popupPlace = null;
 
   @observable places = [];
 
@@ -25,6 +27,8 @@ class WanderersStore {
     if (session_user) {
       this.user = JSON.parse(session_user);
     }
+
+    this.searchPlaces(43.65323, -79.38318);
   }
 
   @action
@@ -47,10 +51,16 @@ class WanderersStore {
   searchPlaces = async (lat, lon) => {
     this.viewport.latitude = lat;
     this.viewport.longitude = lon;
+    this.viewport.zoom = 16;
 
     const response = await this.placesApi.search('abc', lat, lon);
 
     this.places = response.data;
+  };
+
+  @action
+  updatePopupPlace = place => {
+    this.popupPlace = place;
   };
 }
 
