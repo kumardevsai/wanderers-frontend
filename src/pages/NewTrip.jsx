@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-import { observer, inject } from 'mobx-react';
-import { Input } from '../elements/form';
+import { observer, inject } from "mobx-react";
+import { Input } from "../elements/form";
 
-@inject('WanderersStore')
+@inject("WanderersStore")
 @observer
 export default class NewTrip extends Component {
   submitForm = async e => {
@@ -13,6 +13,8 @@ export default class NewTrip extends Component {
     const newTrip = await this.props.WanderersStore.createTrip(
       this.nameInput.value
     );
+    //  redirect when you get the trip
+    this.props.history.push(`/trips/${newTrip.id}`);
   };
 
   render() {

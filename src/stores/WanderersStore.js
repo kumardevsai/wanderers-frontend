@@ -28,7 +28,9 @@ class WanderersStore {
       this.user = JSON.parse(session_user);
     }
 
-    this.searchPlaces(43.65323, -79.38318);
+    if (this.user) {
+      this.searchPlaces(43.65323, -79.38318);
+    }
   }
 
   @action
