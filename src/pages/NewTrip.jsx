@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import { observer, inject } from "mobx-react";
-import { Input } from "../elements/form";
+import { observer, inject } from 'mobx-react';
+import { Input } from '../elements/form';
 
-@inject("WanderersStore")
+@inject('WanderersStore')
 @observer
 export default class NewTrip extends Component {
   submitForm = async e => {

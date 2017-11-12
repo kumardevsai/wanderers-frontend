@@ -41,4 +41,12 @@ export default class PlacesApi {
       }
     );
   };
+
+  loadTrip = (user_token, id) => {
+    return this.api.get(
+      `/trips/${id}`,
+      {},
+      { headers: { Authorization: `Bearer ${user_token}` } }
+    );
+  };
 }
