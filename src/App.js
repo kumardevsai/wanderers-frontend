@@ -3,11 +3,14 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
 import WanderersStore from './stores/WanderersStore';
+import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Places from './pages/Places';
+import NewTrip from './pages/NewTrip';
 
-import './App.css';
+// import './App.css';
+import './scss/main.scss';
 
 class App extends Component {
   render() {
@@ -15,11 +18,16 @@ class App extends Component {
       <Provider WanderersStore={WanderersStore}>
         <div className="App">
           <BrowserRouter>
-            <Switch>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/places" component={Places} />
-            </Switch>
+            <div>
+              <Nav />
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/places" component={Places} />
+                <Route exact path="/trips/new" component={NewTrip} />
+              </Switch>
+            </div>
           </BrowserRouter>
         </div>
       </Provider>

@@ -27,7 +27,7 @@ const Figcaption = styled.figcaption`
   max-width: 200px;
 `;
 
-export default class PopupPlace extends Component {
+export default class PopupContent extends Component {
   render() {
     const place = this.props.place;
     const firstImage = place.place_images[0];

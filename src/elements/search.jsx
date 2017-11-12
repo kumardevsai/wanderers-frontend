@@ -4,7 +4,7 @@ const SearchContainer = styled.section`
   margin: 15px;
   z-index: 10;
   position: absolute;
-  top: 10px;
+  top: 8em;
   left: 10px;
 `;
 

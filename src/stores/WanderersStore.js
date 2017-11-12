@@ -3,12 +3,12 @@ import AuthApi from '../services/AuthApi';
 import PlacesApi from '../services/PlacesApi';
 
 class WanderersStore {
-  @observable user = {};
+  @observable user = null;
 
   @observable
   viewport = {
     width: window.innerWidth,
-    height: window.innerHeight,
+    height: window.innerHeight * 0.75,
     latitude: 43.65323,
     longitude: -79.38318,
     zoom: 13
@@ -53,7 +53,7 @@ class WanderersStore {
     this.viewport.longitude = lon;
     this.viewport.zoom = 16;
 
-    const response = await this.placesApi.search('abc', lat, lon);
+    const response = await this.placesApi.search(this.user.token, lat, lon);
 
     this.places = response.data;
   };
@@ -61,6 +61,13 @@ class WanderersStore {
   @action
   updatePopupPlace = place => {
     this.popupPlace = place;
+  };
+
+  @action
+  createTrip = async name => {
+    const response = await this.placesApi.createTrip(this.user.token, name);
+    // return the trip
+    return response.data;
   };
 }
 

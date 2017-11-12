@@ -60,7 +60,7 @@ export default class MapGL extends Component {
           // From Mapbox: Allows map to display updated viewport (drag & zoom)
           WanderersStore.viewport = viewport;
         }}
-        mapStyle="mapbox://styles/marianserna/cj9dl49je6ab72smd6pt33qwh"
+        mapStyle="mapbox://styles/marianserna/cj9tx7m473dgl2skpjxdc3jb7"
       >
         {this.renderPlaces()}
         {this.renderPopup()}

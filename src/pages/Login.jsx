@@ -26,7 +26,7 @@ export default class Login extends Component {
               Email
             </label>
             <Input
-              ref={input => (this.emailInput = input)}
+              innerRef={input => (this.emailInput = input)}
               type="email"
               className="input-field"
               name="email"
@@ -40,7 +40,7 @@ export default class Login extends Component {
               Password
             </label>
             <Input
-              ref={input => (this.passwordInput = input)}
+              innerRef={input => (this.passwordInput = input)}
               type="password"
               className="input-field"
               name="password"

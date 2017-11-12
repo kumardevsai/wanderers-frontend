@@ -12,10 +12,33 @@ export default class PlacesApi {
   }
 
   search = (user_token, lat, lon) => {
-    // post to #places from places-ms
-    return this.api.get('/places', {
-      lat,
-      lon
-    });
+    // get info from #places from places-ms
+    return this.api.get(
+      '/places',
+      {
+        lat,
+        lon
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user_token}`
+        }
+      }
+    );
+  };
+
+  createTrip = (user_token, name) => {
+    console.log(name);
+    return this.api.post(
+      '/trips',
+      {
+        name
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user_token}`
+        }
+      }
+    );
   };
 }

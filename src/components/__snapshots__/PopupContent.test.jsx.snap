@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays place popup without an image 1`] = `
+<figure
+  class="sc-bdVaJa dMJDoW"
+>
+  <hr />
+  <figcaption
+    class="sc-htpNat ihWVmF"
+  >
+    FAKE PLACE
+  </figcaption>
+</figure>
+`;

@@ -26,7 +26,7 @@ export default class Signup extends Component {
               Name
             </label>
             <input
-              ref={input => (this.nameInput = input)}
+              innerRef={input => (this.nameInput = input)}
               type="text"
               className="input-field"
               name="name"
@@ -40,7 +40,7 @@ export default class Signup extends Component {
               Email
             </label>
             <input
-              ref={input => (this.emailInput = input)}
+              innerRef={input => (this.emailInput = input)}
               type="email"
               className="input-field"
               name="email"
@@ -54,7 +54,7 @@ export default class Signup extends Component {
               Password
             </label>
             <input
-              ref={input => (this.passwordInput = input)}
+              innerRef={input => (this.passwordInput = input)}
               type="password"
               className="password-field"
               name="password"
@@ -68,7 +68,7 @@ export default class Signup extends Component {
               Image
             </label>
             <input
-              ref={input => (this.imageInput = input)}
+              innerRef={input => (this.imageInput = input)}
               type="file"
               className="image-field"
               name="image"
