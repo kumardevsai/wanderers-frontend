@@ -9,6 +9,7 @@ import Signup from './pages/Signup';
 import Places from './pages/Places';
 import NewTrip from './pages/NewTrip';
 import ShowTrip from './pages/ShowTrip';
+import Profile from './pages/Profile';
 
 // import './App.css';
 import './scss/main.scss';
@@ -27,6 +28,7 @@ class App extends Component {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/places" component={Places} />
                 <Route exact path="/trips/new" component={NewTrip} />
+                {/* This type of routing is used when you need to load data before rendering the component for this path -type before action in rails - */}
                 <Route
                   exact
                   path="/trips/:id"
@@ -34,6 +36,14 @@ class App extends Component {
                     const tripId = props.match.params.id;
                     WanderersStore.loadTrip(tripId);
                     return <ShowTrip />;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/profile"
+                  render={() => {
+                    WanderersStore.loadTrips();
+                    return <Profile />;
                   }}
                 />
               </Switch>

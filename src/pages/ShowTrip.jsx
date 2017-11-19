@@ -1,19 +1,26 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import { observer, inject } from "mobx-react";
+import { observer, inject } from 'mobx-react';
 
-import MapGL from "../components/MapGL";
+import MapGL from '../components/MapGL';
+import SearchMap from '../components/SearchMap';
 
-@inject("WanderersStore")
+@inject('WanderersStore')
 @observer
 export default class ShowTrip extends Component {
   render() {
     const { WanderersStore } = this.props;
+    const trip = WanderersStore.trip;
+
+    if (!trip) {
+      return 'Loading';
+    }
 
     return (
       <div>
-        <h2>Soy un trip</h2>
+        <h2>{trip.name}</h2>
+        <SearchMap />
         <MapGL />
       </div>
     );

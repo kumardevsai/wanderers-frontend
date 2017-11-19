@@ -1,6 +1,6 @@
-import { observable, action } from "mobx";
-import AuthApi from "../services/AuthApi";
-import PlacesApi from "../services/PlacesApi";
+import { observable, action } from 'mobx';
+import AuthApi from '../services/AuthApi';
+import PlacesApi from '../services/PlacesApi';
 
 class WanderersStore {
   @observable user = null;
@@ -16,6 +16,7 @@ class WanderersStore {
 
   @observable popupPlace = null;
   @observable places = [];
+  @observable trips = [];
   @observable trip = null;
 
   constructor() {
@@ -23,7 +24,7 @@ class WanderersStore {
     this.placesApi = new PlacesApi();
 
     // ensure that there is a user & load user into state (makes it available in store)
-    const session_user = sessionStorage.getItem("user");
+    const session_user = sessionStorage.getItem('user');
     if (session_user) {
       this.user = JSON.parse(session_user);
     }
@@ -38,7 +39,7 @@ class WanderersStore {
     const response = await this.authApi.login(email, password);
 
     this.user = response.data;
-    sessionStorage.setItem("user", JSON.stringify(this.user));
+    sessionStorage.setItem('user', JSON.stringify(this.user));
   };
 
   @action
@@ -46,7 +47,7 @@ class WanderersStore {
     const response = await this.authApi.signup(name, email, password, image);
 
     this.user = response.data;
-    sessionStorage.setItem("user", JSON.stringify(this.user));
+    sessionStorage.setItem('user', JSON.stringify(this.user));
   };
 
   @action
@@ -77,6 +78,12 @@ class WanderersStore {
     const response = await this.placesApi.loadTrip(this.user.token, id);
     // set trip when response is back
     this.trip = response.data;
+  };
+
+  @action
+  loadTrips = async () => {
+    const response = await this.placesApi.loadTrips(this.user.token);
+    this.trips = response.data;
   };
 }
 
