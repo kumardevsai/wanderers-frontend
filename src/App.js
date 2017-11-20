@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
 import WanderersStore from './stores/WanderersStore';
+import UiStore from './stores/UiStore';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -17,7 +18,7 @@ import './scss/main.scss';
 class App extends Component {
   render() {
     return (
-      <Provider WanderersStore={WanderersStore}>
+      <Provider WanderersStore={WanderersStore} UiStore={UiStore}>
         <div className="App">
           <BrowserRouter>
             <div>

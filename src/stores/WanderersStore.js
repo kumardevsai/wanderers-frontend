@@ -85,6 +85,15 @@ class WanderersStore {
     const response = await this.placesApi.loadTrips(this.user.token);
     this.trips = response.data;
   };
+
+  @action
+  sendInvitation = async email => {
+    const response = await this.placesApi.sendInvitation(
+      this.user.token,
+      email,
+      this.trip.id
+    );
+  };
 }
 
 const singleton = new WanderersStore();

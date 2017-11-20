@@ -57,4 +57,18 @@ export default class PlacesApi {
       { headers: { Authorization: `Bearer ${user_token}` } }
     );
   };
+
+  sendInvitation = (user_token, email, trip_id) => {
+    return this.api.post(
+      `/trips/${trip_id}/invitations`,
+      {
+        email
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user_token}`
+        }
+      }
+    );
+  };
 }

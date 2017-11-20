@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 
 import MapGL from '../components/MapGL';
+import BuddyForm from '../components/BuddyForm';
 import SearchMap from '../components/SearchMap';
 
 @inject('WanderersStore')
@@ -21,6 +22,7 @@ export default class ShowTrip extends Component {
       <div>
         <h2>{trip.name}</h2>
         <SearchMap />
+        <BuddyForm />
         <MapGL />
       </div>
     );
