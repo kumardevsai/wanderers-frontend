@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
 import WanderersStore from './stores/WanderersStore';
@@ -45,6 +45,27 @@ class App extends Component {
                   render={() => {
                     WanderersStore.loadTrips();
                     return <Profile />;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/trips/:id/join"
+                  render={props => {
+                    if (WanderersStore.user) {
+                      // post to buddies create to crete buddy record for user for trip
+                      const tripId = props.match.params.id;
+                      WanderersStore.joinTrip(tripId, props.history);
+                      // redirect to  show trip page /trips/:id
+                      return 'Joining trip 🛵';
+                    } else {
+                      // save in session storage where user wanted to go
+                      sessionStorage.setItem(
+                        'url-after-login',
+                        props.location.pathname
+                      );
+                      // redirect to signup
+                      return <Redirect to="/signup" />;
+                    }
                   }}
                 />
               </Switch>

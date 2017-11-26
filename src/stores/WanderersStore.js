@@ -40,6 +40,8 @@ class WanderersStore {
 
     this.user = response.data;
     sessionStorage.setItem('user', JSON.stringify(this.user));
+
+    return response;
   };
 
   @action
@@ -48,6 +50,7 @@ class WanderersStore {
 
     this.user = response.data;
     sessionStorage.setItem('user', JSON.stringify(this.user));
+    return response;
   };
 
   @action
@@ -88,11 +91,14 @@ class WanderersStore {
 
   @action
   sendInvitation = async email => {
-    const response = await this.placesApi.sendInvitation(
-      this.user.token,
-      email,
-      this.trip.id
-    );
+    await this.placesApi.sendInvitation(this.user.token, email, this.trip.id);
+  };
+
+  // call to placesApi to create buddy
+  @action
+  joinTrip = async (tripId, history) => {
+    await this.placesApi.joinTrip(this.user.token, tripId);
+    history.push(`/trips/${tripId}`);
   };
 }
 

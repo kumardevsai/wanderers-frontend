@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
+import { Input } from '../elements/form';
+
 @inject('WanderersStore')
 @observer
 export default class Signup extends Component {
-  submitForm = e => {
+  submitForm = async e => {
     e.preventDefault();
 
-    this.props.WanderersStore.signup(
+    const response = await this.props.WanderersStore.signup(
       this.nameInput.value,
       this.emailInput.value,
       this.passwordInput.value,
       this.imageInput.files[0]
     );
+
+    const urlAfterLogin =
+      sessionStorage.getItem('url-after-login') || '/places';
+    sessionStorage.removeItem('url-after-login');
+    this.props.history.push(urlAfterLogin);
   };
 
   render() {
@@ -25,7 +32,7 @@ export default class Signup extends Component {
             <label htmlFor="name" className="input-label">
               Name
             </label>
-            <input
+            <Input
               innerRef={input => (this.nameInput = input)}
               type="text"
               className="input-field"
@@ -39,7 +46,7 @@ export default class Signup extends Component {
             <label htmlFor="email" className="input-label">
               Email
             </label>
-            <input
+            <Input
               innerRef={input => (this.emailInput = input)}
               type="email"
               className="input-field"
@@ -53,7 +60,7 @@ export default class Signup extends Component {
             <label htmlFor="password" className="input-label">
               Password
             </label>
-            <input
+            <Input
               innerRef={input => (this.passwordInput = input)}
               type="password"
               className="password-field"
@@ -67,7 +74,7 @@ export default class Signup extends Component {
             <label htmlFor="image" className="input-label">
               Image
             </label>
-            <input
+            <Input
               innerRef={input => (this.imageInput = input)}
               type="file"
               className="image-field"

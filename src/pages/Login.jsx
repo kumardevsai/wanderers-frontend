@@ -6,13 +6,18 @@ import { Input } from '../elements/form';
 @inject('WanderersStore')
 @observer
 export default class Login extends Component {
-  submitForm = e => {
+  submitForm = async e => {
     e.preventDefault();
 
-    this.props.WanderersStore.login(
+    const response = await this.props.WanderersStore.login(
       this.emailInput.value,
       this.passwordInput.value
     );
+
+    const urlAfterLogin =
+      sessionStorage.getItem('url-after-login') || '/places';
+    sessionStorage.removeItem('url-after-login');
+    this.props.history.push(urlAfterLogin);
   };
 
   render() {

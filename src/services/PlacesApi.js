@@ -71,4 +71,16 @@ export default class PlacesApi {
       }
     );
   };
+
+  joinTrip = (user_token, tripId) => {
+    return this.api.post(
+      `/trips/${tripId}/buddies`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${user_token}`
+        }
+      }
+    );
+  };
 }
