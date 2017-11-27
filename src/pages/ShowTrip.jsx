@@ -21,6 +21,11 @@ export default class ShowTrip extends Component {
     return (
       <div>
         <h2>{trip.name}</h2>
+        <ul>
+          {WanderersStore.buddies.map(buddy => (
+            <li key={buddy.id}>{buddy.name}</li>
+          ))}
+        </ul>
         {/* <SearchMap /> */}
         <BuddyForm />
         <Chat />

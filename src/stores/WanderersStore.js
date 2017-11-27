@@ -23,6 +23,7 @@ class WanderersStore {
   @observable trips = [];
   @observable trip = null;
   @observable messages = [];
+  @observable buddies = [];
 
   constructor() {
     this.authApi = new AuthApi();
@@ -90,6 +91,7 @@ class WanderersStore {
     this.trip = response.data;
     this.setupSubscription(id);
     this.loadMessages(id);
+    this.loadBuddies(id);
   };
 
   @action
@@ -138,6 +140,12 @@ class WanderersStore {
   loadMessages = async tripId => {
     const response = await this.placesApi.loadMessages(this.user.token, tripId);
     this.messages = response.data;
+  };
+
+  @action
+  loadBuddies = async tripId => {
+    const response = await this.placesApi.loadBuddies(this.user.token, tripId);
+    this.buddies = response.data;
   };
 }
 

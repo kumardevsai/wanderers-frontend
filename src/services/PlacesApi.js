@@ -93,4 +93,12 @@ export default class PlacesApi {
       { headers: { Authorization: `Bearer ${user_token}` } }
     );
   };
+
+  loadBuddies = (user_token, tripId) => {
+    return this.api.get(
+      `/trips/${tripId}/buddies`,
+      {},
+      { headers: { Authorization: `Bearer ${user_token}` } }
+    );
+  };
 }
