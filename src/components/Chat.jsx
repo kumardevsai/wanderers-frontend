@@ -19,7 +19,7 @@ export default class Chat extends React.Component {
         <div className="messages">
           {WanderersStore.messages.map(message => (
             <div className="msg" key={message.id}>
-              <div className="msg_user_name">{message.user_id}</div>
+              <div className="msg_user_name">{message.name}</div>
               <div className="msg_content">{message.text}</div>
             </div>
           ))}
