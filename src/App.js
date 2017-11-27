@@ -55,7 +55,6 @@ class App extends Component {
                       // post to buddies create to crete buddy record for user for trip
                       const tripId = props.match.params.id;
                       WanderersStore.joinTrip(tripId, props.history);
-                      // redirect to  show trip page /trips/:id
                       return 'Joining trip 🛵';
                     } else {
                       // save in session storage where user wanted to go

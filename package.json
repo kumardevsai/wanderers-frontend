@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "actioncable": "^5.1.4",
     "apisauce": "^0.14.1",
     "autoprefixer": "7.1.2",
     "babel-core": "6.25.0",

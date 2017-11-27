@@ -1,6 +1,10 @@
 import { observable, action } from 'mobx';
+
+import Hosts from '../services/Hosts';
 import AuthApi from '../services/AuthApi';
 import PlacesApi from '../services/PlacesApi';
+
+import ActionCable from 'actioncable';
 
 class WanderersStore {
   @observable user = null;
@@ -18,10 +22,13 @@ class WanderersStore {
   @observable places = [];
   @observable trips = [];
   @observable trip = null;
+  @observable messages = [];
 
   constructor() {
     this.authApi = new AuthApi();
     this.placesApi = new PlacesApi();
+
+    this.cable = ActionCable.createConsumer(`${Hosts.placesHost()}/cable`);
 
     // ensure that there is a user & load user into state (makes it available in store)
     const session_user = sessionStorage.getItem('user');
@@ -81,6 +88,7 @@ class WanderersStore {
     const response = await this.placesApi.loadTrip(this.user.token, id);
     // set trip when response is back
     this.trip = response.data;
+    this.setupSubscription(id);
   };
 
   @action
@@ -99,6 +107,33 @@ class WanderersStore {
   joinTrip = async (tripId, history) => {
     await this.placesApi.joinTrip(this.user.token, tripId);
     history.push(`/trips/${tripId}`);
+  };
+
+  // Chat stuff
+  @action
+  setupSubscription = tripId => {
+    this.subscription = this.cable.subscriptions.create(
+      {
+        channel: 'ChatChannel',
+        trip_id: tripId
+      },
+      {
+        received: message => {
+          this.messages.push(message);
+        },
+        talk: (text, userId) => {
+          this.subscription.perform('talk', {
+            text: text,
+            user_id: userId
+          });
+        }
+      }
+    );
+  };
+
+  @action
+  sendMessage = text => {
+    this.subscription.talk(text, this.user.id);
   };
 }
 

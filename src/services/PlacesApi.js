@@ -1,9 +1,11 @@
 import { create } from 'apisauce';
 
+import Hosts from './Hosts';
+
 export default class PlacesApi {
   constructor() {
     this.api = create({
-      baseURL: 'http://localhost:5000',
+      baseURL: Hosts.placesHost(),
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'

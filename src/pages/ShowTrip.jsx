@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { observer, inject } from 'mobx-react';
 
 import MapGL from '../components/MapGL';
 import BuddyForm from '../components/BuddyForm';
 import SearchMap from '../components/SearchMap';
+import Chat from '../components/Chat';
 
 @inject('WanderersStore')
 @observer
@@ -21,8 +21,9 @@ export default class ShowTrip extends Component {
     return (
       <div>
         <h2>{trip.name}</h2>
-        <SearchMap />
+        {/* <SearchMap /> */}
         <BuddyForm />
+        <Chat />
         <MapGL />
       </div>
     );

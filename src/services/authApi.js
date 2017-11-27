@@ -1,10 +1,12 @@
 import { create } from 'apisauce';
 
+import Hosts from './Hosts';
+
 export default class AuthApi {
   constructor() {
     this.api = create({
       // custom url (it has to redirect to facebook) -> atom /etc/hosts
-      baseURL: 'http://local.auth.wanderers.com:4000',
+      baseURL: Hosts.authHost(),
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
