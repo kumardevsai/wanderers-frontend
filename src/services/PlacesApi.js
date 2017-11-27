@@ -85,4 +85,12 @@ export default class PlacesApi {
       }
     );
   };
+
+  loadMessages = (user_token, tripId) => {
+    return this.api.get(
+      `/trips/${tripId}/messages`,
+      {},
+      { headers: { Authorization: `Bearer ${user_token}` } }
+    );
+  };
 }

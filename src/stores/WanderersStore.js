@@ -89,6 +89,7 @@ class WanderersStore {
     // set trip when response is back
     this.trip = response.data;
     this.setupSubscription(id);
+    this.loadMessages(id);
   };
 
   @action
@@ -131,6 +132,12 @@ class WanderersStore {
       text: text,
       user_id: this.user.id
     });
+  };
+
+  @action
+  loadMessages = async tripId => {
+    const response = await this.placesApi.loadMessages(this.user.token, tripId);
+    this.messages = response.data;
   };
 }
 
