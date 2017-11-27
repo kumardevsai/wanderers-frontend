@@ -120,12 +120,6 @@ class WanderersStore {
       {
         received: message => {
           this.messages.push(message);
-        },
-        talk: (text, userId) => {
-          this.subscription.perform('talk', {
-            text: text,
-            user_id: userId
-          });
         }
       }
     );
@@ -133,7 +127,10 @@ class WanderersStore {
 
   @action
   sendMessage = text => {
-    this.subscription.talk(text, this.user.id);
+    this.subscription.perform('talk', {
+      text: text,
+      user_id: this.user.id
+    });
   };
 }
 
