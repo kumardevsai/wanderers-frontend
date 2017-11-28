@@ -2,6 +2,9 @@ import React from 'react';
 
 import { observer, inject } from 'mobx-react';
 
+import { ChatForm, ChatTextarea } from '../elements/chat';
+import { FilledButton } from '../elements/form';
+
 @inject('WanderersStore')
 @observer
 export default class Chat extends React.Component {
@@ -26,14 +29,17 @@ export default class Chat extends React.Component {
         </div>
 
         <section className="messageForm">
-          <form
+          <ChatForm
             onSubmit={e => {
               this.submitForm(e);
             }}
           >
-            <textarea ref={area => (this.content = area)} />
-            <button type="submit">Send</button>
-          </form>
+            <ChatTextarea
+              ref={area => (this.content = area)}
+              placeholder="YOUR MESSAGE"
+            />
+            <FilledButton type="submit">SEND</FilledButton>
+          </ChatForm>
         </section>
       </div>
     );

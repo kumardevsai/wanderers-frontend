@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 
-import { SearchContainer } from '../elements/search';
+import { NavStyle, NavLink } from '../elements/nav';
 
 @inject('WanderersStore')
 @observer
@@ -12,33 +11,36 @@ export default class Nav extends Component {
     const user = WanderersStore.user;
 
     return (
-      <nav>
-        <div className="home-link">
-          <Link to="/">HOME</Link>
+      <NavStyle>
+        <div>
+          <NavLink to="/">HOME</NavLink>
         </div>
         {user ? (
           <ul>
             <li>
-              <Link to="/places">MAP SEARCH</Link>
+              <NavLink to="/profile">PROFILE</NavLink>
             </li>
             <li>
-              <Link to="/trips/new">PLAN TRIP</Link>
+              <NavLink to="/places">MAP SEARCH</NavLink>
+            </li>
+            <li>
+              <NavLink to="/trips/new">PLAN TRIP</NavLink>
             </li>
           </ul>
         ) : (
           <ul>
             <li>
-              <Link to="/signup">SIGN UP</Link>
+              <NavLink to="/signup">SIGN UP</NavLink>
             </li>
             <li>
-              <Link to="/login">LOGIN</Link>
+              <NavLink to="/login">LOGIN</NavLink>
             </li>
             <li>
-              <Link to="/">FACEBOOK</Link>
+              <NavLink to="/">FACEBOOK</NavLink>
             </li>
           </ul>
         )}
-      </nav>
+      </NavStyle>
     );
   }
 }

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+
 import styled from 'styled-components';
+import { colors, fonts } from '../elements/variables';
+
+import { observer, inject } from 'mobx-react';
 
 const Figure = styled.figure`
-  background-color: #fff;
-  border-radius: 3px;
+  background-color: ${colors.white};
 `;
 
 const CardImg = styled.img`
@@ -19,14 +22,17 @@ const CardImg = styled.img`
 `;
 
 const Figcaption = styled.figcaption`
-  color: #000;
+  color: ${colors.black};
   text-align: center;
+  font-family: ${fonts.body};
   font-weight: bold;
-  color: #69619b;
+  color: ${colors.black};
   margin-top: 20px;
   max-width: 200px;
 `;
 
+@inject('WanderersStore')
+@observer
 export default class PopupContent extends Component {
   render() {
     const place = this.props.place;

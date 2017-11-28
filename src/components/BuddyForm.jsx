@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { Input } from '../elements/form';
+import {
+  Form,
+  InputWrapper,
+  Label,
+  Input,
+  ActionsContainer,
+  Action,
+  BuddyFormContainer
+} from '../elements/form';
 
 @inject('WanderersStore')
 @observer
@@ -14,29 +22,29 @@ export default class BuddyForm extends Component {
 
   render() {
     return (
-      <div className="buddy_form_container">
-        <form onSubmit={e => this.submitForm(e)}>
-          <div className="input-wrapper">
-            <label htmlFor="email" className="input-label">
+      <BuddyFormContainer>
+        <Form onSubmit={e => this.submitForm(e)}>
+          <InputWrapper>
+            <Label htmlFor="email" className="input-label">
               Invite a Friend
-            </label>
+            </Label>
             <Input
               innerRef={input => (this.emailInput = input)}
               type="email"
               className="input-field"
               name="email"
               id="email"
-              placeholder="email"
+              placeholder="EMAIL"
               required
             />
-          </div>
+          </InputWrapper>
 
-          <div className="input-container">
-            <button type="submit">SEND</button>
-            <button>CANCEL</button>
-          </div>
-        </form>
-      </div>
+          <ActionsContainer>
+            <Action type="submit">SEND</Action>
+            <Action>CANCEL</Action>
+          </ActionsContainer>
+        </Form>
+      </BuddyFormContainer>
     );
   }
 }

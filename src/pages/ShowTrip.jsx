@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { observer, inject } from 'mobx-react';
+import { ChatBuddyList, ChatBuddyListItem } from '../elements/chat';
 
 import MapGL from '../components/MapGL';
 import BuddyForm from '../components/BuddyForm';
@@ -20,13 +21,15 @@ export default class ShowTrip extends Component {
 
     return (
       <div>
-        <h2>{trip.name}</h2>
-        <ul>
+        <h3>{trip.name}</h3>
+        <ChatBuddyList>
           {WanderersStore.buddies.map(buddy => (
-            <li key={buddy.id}>{buddy.name}</li>
+            <ChatBuddyListItem key={buddy.id}>
+              Trip Buddies: {buddy.name}
+            </ChatBuddyListItem>
           ))}
-        </ul>
-        {/* <SearchMap /> */}
+        </ChatBuddyList>
+        <SearchMap />
         <BuddyForm />
         <Chat />
         <MapGL />

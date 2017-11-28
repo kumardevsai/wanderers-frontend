@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { Input } from '../elements/form';
+import {
+  FormContainer,
+  Form,
+  Heading2,
+  Label,
+  InputWrapper,
+  Input,
+  ActionsContainer,
+  Action
+} from '../elements/form';
 
 @inject('WanderersStore')
 @observer
@@ -22,44 +31,44 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="login_container">
-        <h2>Login</h2>
+      <FormContainer>
+        <Form onSubmit={e => this.submitForm(e)}>
+          <Heading2>Login</Heading2>
 
-        <form onSubmit={e => this.submitForm(e)}>
-          <div className="input-wrapper">
-            <label htmlFor="email" className="input-label">
+          <InputWrapper>
+            <Label htmlFor="email" className="inputLabel">
               Email
-            </label>
+            </Label>
             <Input
               innerRef={input => (this.emailInput = input)}
               type="email"
-              className="input-field"
+              className="inputField"
               name="email"
               id="email"
               required
             />
-          </div>
+          </InputWrapper>
 
-          <div className="input-wrapper">
-            <label htmlFor="password" className="input-label">
+          <InputWrapper>
+            <Label htmlFor="password" className="inputLabel">
               Password
-            </label>
+            </Label>
             <Input
               innerRef={input => (this.passwordInput = input)}
               type="password"
-              className="input-field"
+              className="inputField"
               name="password"
               id="password"
               required
             />
-          </div>
+          </InputWrapper>
 
-          <div className="input-container">
-            <button type="submit">LOGIN</button>
-            <button>CANCEL</button>
-          </div>
-        </form>
-      </div>
+          <ActionsContainer>
+            <Action type="submit">LOGIN</Action>
+            <Action>CANCEL</Action>
+          </ActionsContainer>
+        </Form>
+      </FormContainer>
     );
   }
 }

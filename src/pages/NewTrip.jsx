@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { observer, inject } from 'mobx-react';
-import { Input } from '../elements/form';
+import {
+  FormContainer,
+  Heading2,
+  Form,
+  InputWrapper,
+  Label,
+  Input,
+  ActionsContainer,
+  Action,
+  LinkButton
+} from '../elements/form';
 
 @inject('WanderersStore')
 @observer
@@ -21,26 +30,30 @@ export default class NewTrip extends Component {
     const { WanderersStore } = this.props;
 
     return (
-      <form onSubmit={e => this.submitForm(e)}>
-        <div className="input-wrapper">
-          <label htmlFor="name" className="input-label">
-            Name
-          </label>
-          <Input
-            innerRef={input => (this.nameInput = input)}
-            type="text"
-            className="input-field"
-            name="name"
-            id="name"
-            required
-          />
+      <FormContainer>
+        <Form onSubmit={e => this.submitForm(e)}>
+          <Heading2>New Trip</Heading2>
+          <InputWrapper>
+            <Label htmlFor="name" className="input-label">
+              New Trip Name
+            </Label>
+            <Input
+              innerRef={input => (this.nameInput = input)}
+              type="text"
+              className="input-field"
+              name="name"
+              id="name"
+              placeholder="Name"
+              required
+            />
 
-          <div className="input-container">
-            <button type="submit">SUBMIT</button>
-            <Link to="/places">CANCEL</Link>
-          </div>
-        </div>
-      </form>
+            <ActionsContainer>
+              <Action type="submit">SUBMIT</Action>
+              <LinkButton to="/places">CANCEL</LinkButton>
+            </ActionsContainer>
+          </InputWrapper>
+        </Form>
+      </FormContainer>
     );
   }
 }

@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react';
 
 import WanderersStore from './stores/WanderersStore';
 import UiStore from './stores/UiStore';
+import Home from './pages/Home';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -12,7 +13,6 @@ import NewTrip from './pages/NewTrip';
 import ShowTrip from './pages/ShowTrip';
 import Profile from './pages/Profile';
 
-// import './App.css';
 import './scss/main.scss';
 
 class App extends Component {
@@ -24,7 +24,7 @@ class App extends Component {
             <div>
               <Nav />
               <Switch>
-                <Route exact path="/" component={Login} />
+                <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/places" component={Places} />

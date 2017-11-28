@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { Input } from '../elements/form';
+import {
+  FormContainer,
+  Form,
+  Heading2,
+  Label,
+  InputWrapper,
+  Input,
+  ActionsContainer,
+  Action
+} from '../elements/form';
 
 @inject('WanderersStore')
 @observer
@@ -24,72 +33,71 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="signup_container">
-        <h2>Sign Up</h2>
-
-        <form onSubmit={e => this.submitForm(e)}>
-          <div className="input-wrapper">
-            <label htmlFor="name" className="input-label">
+      <FormContainer>
+        <Form onSubmit={e => this.submitForm(e)}>
+          <Heading2>Sign Up</Heading2>
+          <InputWrapper>
+            <Label htmlFor="name" className="inputLabel">
               Name
-            </label>
+            </Label>
             <Input
               innerRef={input => (this.nameInput = input)}
               type="text"
-              className="input-field"
+              className="inputField"
               name="name"
               id="name"
               required
             />
-          </div>
+          </InputWrapper>
 
-          <div className="input-wrapper">
-            <label htmlFor="email" className="input-label">
+          <InputWrapper>
+            <Label htmlFor="email" className="inputLabel">
               Email
-            </label>
+            </Label>
             <Input
               innerRef={input => (this.emailInput = input)}
               type="email"
-              className="input-field"
+              className="inputField"
               name="email"
               id="email"
               required
             />
-          </div>
+          </InputWrapper>
 
-          <div className="input-wrapper">
-            <label htmlFor="password" className="input-label">
+          <InputWrapper>
+            <Label htmlFor="password" className="inputLabel">
               Password
-            </label>
+            </Label>
             <Input
               innerRef={input => (this.passwordInput = input)}
               type="password"
-              className="password-field"
+              className="inputField"
               name="password"
               id="password"
               required
             />
-          </div>
+          </InputWrapper>
 
-          <div className="input-wrapper">
-            <label htmlFor="image" className="input-label">
+          <InputWrapper>
+            <Label htmlFor="image" className="inputLabel">
               Image
-            </label>
+            </Label>
             <Input
               innerRef={input => (this.imageInput = input)}
               type="file"
-              className="image-field"
+              className="inputField"
               name="image"
               id="image"
               required
             />
-          </div>
+          </InputWrapper>
 
-          <div className="input-container">
-            <button type="submit">SAVE</button>
-            <button>CANCEL</button>
-          </div>
-        </form>
-      </div>
+          <ActionsContainer>
+            <Action type="submit">SAVE</Action>
+            <Action>CANCEL</Action>
+          </ActionsContainer>
+        </Form>
+      </FormContainer>
     );
   }
 }

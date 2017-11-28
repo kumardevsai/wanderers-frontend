@@ -5,6 +5,8 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import CityPin from '../components/CityPin';
 import PopupContent from '../components/PopupContent';
 
+import { MapContainer } from '../elements/map';
+
 @inject('WanderersStore')
 @observer
 export default class MapGL extends Component {
@@ -53,18 +55,20 @@ export default class MapGL extends Component {
     const viewport = WanderersStore.viewport;
 
     return (
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken="pk.eyJ1IjoibWFyaWFuc2VybmEiLCJhIjoiY2o0dm8wcGpqMHZ2YzJxcjV0ZDFvbTM5dSJ9.W5BkzLIaUIZcVuiSFbVTsw"
-        onViewportChange={viewport => {
-          // From Mapbox: Allows map to display updated viewport (drag & zoom)
-          WanderersStore.viewport = viewport;
-        }}
-        mapStyle="mapbox://styles/marianserna/cj9tx7m473dgl2skpjxdc3jb7"
-      >
-        {this.renderPlaces()}
-        {this.renderPopup()}
-      </ReactMapGL>
+      <MapContainer>
+        <ReactMapGL
+          {...viewport}
+          mapboxApiAccessToken="pk.eyJ1IjoibWFyaWFuc2VybmEiLCJhIjoiY2o0dm8wcGpqMHZ2YzJxcjV0ZDFvbTM5dSJ9.W5BkzLIaUIZcVuiSFbVTsw"
+          onViewportChange={viewport => {
+            // From Mapbox: Allows map to display updated viewport (drag & zoom)
+            WanderersStore.viewport = viewport;
+          }}
+          mapStyle="mapbox://styles/marianserna/cj9tx7m473dgl2skpjxdc3jb7"
+        >
+          {this.renderPlaces()}
+          {this.renderPopup()}
+        </ReactMapGL>
+      </MapContainer>
     );
   }
 }

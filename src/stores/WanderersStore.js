@@ -12,7 +12,7 @@ class WanderersStore {
   @observable
   viewport = {
     width: window.innerWidth,
-    height: window.innerHeight * 0.75,
+    height: window.innerHeight * 0.9,
     latitude: 43.65323,
     longitude: -79.38318,
     zoom: 13

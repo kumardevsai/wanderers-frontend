@@ -4,6 +4,18 @@ body {
 
 h1 {
   font-size: $h1-font-size;
-  font-family: $headings-font;
+  font-family: 'Anton', sans-serif;
   padding: $spacing-small;
+  color: #000;
+}
+
+h3 {
+  position: absolute;
+  left: 8vw;
+  padding-top: 20px;
+  font-size: 20px;
+  color: #03243a;
+  text-align: center;
+  text-decoration-line: underline;
+  font-family: $headings-font;
 }
