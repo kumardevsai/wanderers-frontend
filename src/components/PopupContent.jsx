@@ -35,6 +35,7 @@ const Figcaption = styled.figcaption`
 @observer
 export default class PopupContent extends Component {
   render() {
+    const { WanderersStore } = this.props;
     const place = this.props.place;
     const firstImage = place.place_images[0];
 
@@ -45,6 +46,18 @@ export default class PopupContent extends Component {
         ) : null}
         <hr />
         <Figcaption>{place.name.toUpperCase()}</Figcaption>
+        {WanderersStore.trip ? (
+          <button
+            onClick={e => {
+              e.preventDefault();
+              WanderersStore.addStopToTrip(place.id);
+            }}
+          >
+            ADD STOP
+          </button>
+        ) : (
+          ''
+        )}
       </Figure>
     );
   }

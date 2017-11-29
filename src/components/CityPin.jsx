@@ -14,7 +14,7 @@ const pinStyle = {
 
 export default class CityPin extends PureComponent {
   render() {
-    const { size = 20, onClick } = this.props;
+    const { size = 20, onClick, color } = this.props;
 
     return (
       <svg
@@ -22,6 +22,7 @@ export default class CityPin extends PureComponent {
         viewBox="0 0 24 24"
         style={{
           ...pinStyle,
+          fill: color || colors.black,
           transform: `translate(${-size / 2}px,${-size}px)`
         }}
         onClick={onClick}

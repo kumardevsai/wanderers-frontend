@@ -7,8 +7,6 @@ import PlacesApi from '../services/PlacesApi';
 import ActionCable from 'actioncable';
 
 class WanderersStore {
-  @observable user = null;
-
   @observable
   viewport = {
     width: window.innerWidth,
@@ -18,12 +16,14 @@ class WanderersStore {
     zoom: 13
   };
 
+  @observable user = null;
   @observable popupPlace = null;
   @observable places = [];
   @observable trips = [];
   @observable trip = null;
   @observable messages = [];
   @observable buddies = [];
+  @observable stops = [];
 
   constructor() {
     this.authApi = new AuthApi();
@@ -62,6 +62,12 @@ class WanderersStore {
   };
 
   @action
+  logout = () => {
+    sessionStorage.clear();
+    this.user = null;
+  };
+
+  @action
   searchPlaces = async (lat, lon) => {
     this.viewport.latitude = lat;
     this.viewport.longitude = lon;
@@ -92,6 +98,7 @@ class WanderersStore {
     this.setupSubscription(id);
     this.loadMessages(id);
     this.loadBuddies(id);
+    this.loadStops(id);
   };
 
   @action
@@ -146,6 +153,23 @@ class WanderersStore {
   loadBuddies = async tripId => {
     const response = await this.placesApi.loadBuddies(this.user.token, tripId);
     this.buddies = response.data;
+  };
+
+  @action
+  addStopToTrip = async placeId => {
+    const response = await this.placesApi.addStopToTrip(
+      this.user.token,
+      this.trip.id,
+      placeId
+    );
+    const stop = response.data;
+    this.stops.push(stop);
+  };
+
+  @action
+  loadStops = async tripId => {
+    const response = await this.placesApi.loadStops(this.user.token, tripId);
+    this.stops = response.data;
   };
 }
 

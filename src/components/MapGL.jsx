@@ -50,6 +50,24 @@ export default class MapGL extends Component {
     );
   };
 
+  renderStops = () => {
+    const { WanderersStore } = this.props;
+    return WanderersStore.stops.map(stop => (
+      <Marker
+        key={stop.id}
+        latitude={parseFloat(stop.lat)}
+        longitude={parseFloat(stop.lon)}
+      >
+        <CityPin
+          color={'red'}
+          onClick={() => {
+            WanderersStore.updatePopupPlace(stop);
+          }}
+        />
+      </Marker>
+    ));
+  };
+
   render() {
     const { WanderersStore } = this.props;
     const viewport = WanderersStore.viewport;
@@ -67,6 +85,7 @@ export default class MapGL extends Component {
         >
           {this.renderPlaces()}
           {this.renderPopup()}
+          {this.renderStops()}
         </ReactMapGL>
       </MapContainer>
     );

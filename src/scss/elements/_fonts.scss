@@ -6,7 +6,8 @@ h1 {
   font-size: $h1-font-size;
   font-family: 'Anton', sans-serif;
   padding: $spacing-small;
-  color: #000;
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
 }
 
 h3 {
@@ -14,7 +15,7 @@ h3 {
   left: 8vw;
   padding-top: 20px;
   font-size: 20px;
-  color: #03243a;
+  color: #fff;
   text-align: center;
   text-decoration-line: underline;
   font-family: $headings-font;

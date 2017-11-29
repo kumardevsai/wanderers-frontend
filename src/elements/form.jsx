@@ -35,7 +35,7 @@ const Label = styled.label`
   font-size: ${fontSizes.small};
   font-family: ${fonts.body};
   text-decoration: underline;
-  color: ${colors.darkBlue};
+  color: ${colors.white};
   text-transform: uppercase;
   margin-bottom: ${margin.mini};
   display: block;
@@ -60,7 +60,7 @@ const Input = styled.input`
   }
 
   &:focus {
-    outline: ${colors.darkBlue};
+    outline: ${colors.white};
   }
 `;
 
@@ -74,12 +74,12 @@ const ActionsContainer = styled.div`
 const Action = styled.button`
   font-family: ${fonts.body};
   border-radius: 0px;
-  border: 1px solid ${colors.darkBlue};
+  border: 1px solid ${colors.white};
   padding: ${padding.mini};
   margin: ${margin.mini};
   width: 10rem;
   background-color: transparent;
-  color: ${colors.darkBlue};
+  color: ${colors.white};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: background-color 1s ease;
 

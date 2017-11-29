@@ -101,4 +101,24 @@ export default class PlacesApi {
       { headers: { Authorization: `Bearer ${user_token}` } }
     );
   };
+
+  addStopToTrip = (user_token, tripId, placeId) => {
+    return this.api.post(
+      `/trips/${tripId}/stops`,
+      { place_id: placeId },
+      {
+        headers: {
+          Authorization: `Bearer ${user_token}`
+        }
+      }
+    );
+  };
+
+  loadStops = (user_token, tripId) => {
+    return this.api.get(
+      `/trips/${tripId}/stops`,
+      {},
+      { headers: { Authorization: `Bearer ${user_token}` } }
+    );
+  };
 }

@@ -25,9 +25,12 @@ const ChatTextarea = styled.textarea`
 
 const ChatBuddyList = styled.ul`
   position: absolute;
+  top: 0;
   right: 3%;
   padding-top: ${padding.small};
   align-self: flex-end;
+  display: flex;
+  z-index: 6;
 `;
 
 const ChatBuddyListItem = styled.li`

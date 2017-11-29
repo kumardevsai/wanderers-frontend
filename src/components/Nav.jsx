@@ -26,6 +26,9 @@ export default class Nav extends Component {
             <li>
               <NavLink to="/trips/new">PLAN TRIP</NavLink>
             </li>
+            <li>
+              <NavLink to="/logout">LOG OUT</NavLink>
+            </li>
           </ul>
         ) : (
           <ul>

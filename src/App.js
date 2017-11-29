@@ -67,6 +67,14 @@ class App extends Component {
                     }
                   }}
                 />
+                <Route
+                  exact
+                  path="/logout"
+                  render={() => {
+                    WanderersStore.logout();
+                    return <Redirect to="/" />;
+                  }}
+                />
               </Switch>
             </div>
           </BrowserRouter>
