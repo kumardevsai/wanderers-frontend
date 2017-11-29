@@ -40,8 +40,11 @@ export default class ShowTrip extends Component {
     navigator.getUserMedia(
       { video: true, audio: true },
       stream => {
+        this.stream = stream;
         this.localVideo.srcObject = stream;
-        this.call.answer(stream); // Answer the call with an A/V stream.
+        this.call.answer(stream);
+
+        // Answer the call with an A/V stream.
         this.call.on('stream', remoteStream => {
           this.remoteVideo.srcObject = remoteStream;
         });
@@ -56,7 +59,13 @@ export default class ShowTrip extends Component {
     e.preventDefault();
 
     this.call.close();
+
+    this.localVideo.srcObject = null;
     this.props.UiStore.callInProgress = false;
+
+    this.stream.getTracks().forEach(track => {
+      track.stop();
+    });
   };
 
   startChat = (e, userId) => {
@@ -72,6 +81,7 @@ export default class ShowTrip extends Component {
       { video: true, audio: true },
       stream => {
         this.call = this.peer.call(userId, stream);
+        this.stream = stream;
         this.localVideo.srcObject = stream;
         this.props.UiStore.callInProgress = true;
 
