@@ -18,7 +18,7 @@ export default class Nav extends Component {
         {user ? (
           <ul>
             <li>
-              <NavLink to="/profile">PROFILE</NavLink>
+              <NavLink to="/trips">MY TRIPS</NavLink>
             </li>
             <li>
               <NavLink to="/places">MAP SEARCH</NavLink>

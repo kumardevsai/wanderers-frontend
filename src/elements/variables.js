@@ -4,7 +4,8 @@ export const colors = {
   darkBlue: '#03243A',
   white: '#FFFFFF',
   black: '#212121',
-  lillac: '#9068BE'
+  lillac: '#9068BE',
+  lightPurple: '#b9a7c2'
 };
 
 export const fontSizes = {

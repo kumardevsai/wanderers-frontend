@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { colors, fonts } from '../elements/variables';
+
+import PopupAction from './PopupAction';
 
 import { observer, inject } from 'mobx-react';
 
@@ -34,8 +37,11 @@ const Figcaption = styled.figcaption`
 @inject('WanderersStore')
 @observer
 export default class PopupContent extends Component {
+  static propTypes = {
+    place: PropTypes.object.isRequired
+  };
+
   render() {
-    const { WanderersStore } = this.props;
     const place = this.props.place;
     const firstImage = place.place_images[0];
 
@@ -46,18 +52,7 @@ export default class PopupContent extends Component {
         ) : null}
         <hr />
         <Figcaption>{place.name.toUpperCase()}</Figcaption>
-        {WanderersStore.trip ? (
-          <button
-            onClick={e => {
-              e.preventDefault();
-              WanderersStore.addStopToTrip(place.id);
-            }}
-          >
-            ADD STOP
-          </button>
-        ) : (
-          ''
-        )}
+        <PopupAction place={place} />
       </Figure>
     );
   }

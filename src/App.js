@@ -11,7 +11,7 @@ import Signup from './pages/Signup';
 import Places from './pages/Places';
 import NewTrip from './pages/NewTrip';
 import ShowTrip from './pages/ShowTrip';
-import Profile from './pages/Profile';
+import TripsListing from './pages/TripsListing';
 
 import './scss/main.scss';
 
@@ -39,14 +39,16 @@ class App extends Component {
                     return <ShowTrip />;
                   }}
                 />
+
                 <Route
                   exact
-                  path="/profile"
+                  path="/trips"
                   render={() => {
                     WanderersStore.loadTrips();
-                    return <Profile />;
+                    return <TripsListing />;
                   }}
                 />
+
                 <Route
                   exact
                   path="/trips/:id/join"
@@ -67,6 +69,7 @@ class App extends Component {
                     }
                   }}
                 />
+
                 <Route
                   exact
                   path="/logout"

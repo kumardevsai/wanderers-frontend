@@ -114,6 +114,18 @@ export default class PlacesApi {
     );
   };
 
+  removeStopFromTrip = (user_token, tripId, stopId) => {
+    return this.api.delete(
+      `/trips/${tripId}/stops/${stopId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${user_token}`
+        }
+      }
+    );
+  };
+
   loadStops = (user_token, tripId) => {
     return this.api.get(
       `/trips/${tripId}/stops`,

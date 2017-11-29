@@ -126,7 +126,7 @@ class WanderersStore {
     history.push(`/trips/${tripId}`);
   };
 
-  // Real time stuff for chat and stop
+  // Real time stuff events for chat and stop
   @action
   setupSubscription = tripId => {
     this.subscription = this.cable.subscriptions.create(
@@ -141,6 +141,8 @@ class WanderersStore {
             this.messages.push(data);
           } else if (type === 'new_stop') {
             this.stops.push(data);
+          } else if (type === 'remove_stop') {
+            this.stops = this.stops.filter(stop => stop.id !== data);
           }
         }
       }
@@ -170,6 +172,15 @@ class WanderersStore {
   @action
   addStopToTrip = async placeId => {
     await this.placesApi.addStopToTrip(this.user.token, this.trip.id, placeId);
+  };
+
+  @action
+  removeStopFromTrip = async stopId => {
+    await this.placesApi.removeStopFromTrip(
+      this.user.token,
+      this.trip.id,
+      stopId
+    );
   };
 
   @action

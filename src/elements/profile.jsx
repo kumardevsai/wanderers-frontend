@@ -12,9 +12,10 @@ const ProfilePage = styled.div`
 
 const TripVisualization = styled.section`
   width: 70%;
-  background-color: ${colors.black};
+  background-color: ${colors.white};
   height: 100vh;
   padding: 0px;
+  ${'' /* color: ${colors.white}; */};
 `;
 
 const UserTrips = styled.section`
@@ -49,6 +50,17 @@ const TripLink = styled(Link)`
   }
 `;
 
+const TripIcon = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${colors.white};
+  }
+`;
+
 const ListItemLine = styled.hr`
   border: 2px solid ${colors.black};
   width: 80%;
@@ -61,5 +73,6 @@ export {
   TripsList,
   TripsListItem,
   ListItemLine,
-  TripLink
+  TripLink,
+  TripIcon
 };

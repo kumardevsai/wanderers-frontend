@@ -12,7 +12,7 @@ const NavStyle = styled.nav`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: ${colors.white};
+  background-color: ${colors.lightPurple};
   ${'' /* display: none; */};
 `;
 

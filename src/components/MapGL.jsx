@@ -55,13 +55,13 @@ export default class MapGL extends Component {
     return WanderersStore.stops.map(stop => (
       <Marker
         key={`stop-${stop.id}`}
-        latitude={parseFloat(stop.lat)}
-        longitude={parseFloat(stop.lon)}
+        latitude={parseFloat(stop.place.lat)}
+        longitude={parseFloat(stop.place.lon)}
       >
         <CityPin
           color={stop.color}
           onClick={() => {
-            WanderersStore.updatePopupPlace(stop);
+            WanderersStore.updatePopupPlace(stop.place);
           }}
         />
       </Marker>
