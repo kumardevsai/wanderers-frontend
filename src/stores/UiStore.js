@@ -4,6 +4,8 @@ class UiStore {
   @observable showBuddyForm = false;
   @observable showAnswerCall = false;
   @observable callInProgress = false;
+  @observable loginFormError = null;
+  @observable signupFormErrors = null;
 }
 
 const singleton = new UiStore();

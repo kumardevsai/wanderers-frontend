@@ -12,23 +12,29 @@ import {
   Action
 } from '../elements/form';
 
-@inject('WanderersStore')
+@inject('WanderersStore', 'UiStore')
 @observer
 export default class Signup extends Component {
   submitForm = async e => {
     e.preventDefault();
 
-    const response = await this.props.WanderersStore.signup(
+    const signupSuccessful = await this.props.WanderersStore.signup(
       this.nameInput.value,
       this.emailInput.value,
       this.passwordInput.value,
       this.imageInput.files[0]
     );
 
-    const urlAfterLogin =
-      sessionStorage.getItem('url-after-login') || '/places';
-    sessionStorage.removeItem('url-after-login');
-    this.props.history.push(urlAfterLogin);
+    this.props.UiStore.signupFormErrors = null;
+
+    if (signupSuccessful === true) {
+      const urlAfterLogin =
+        sessionStorage.getItem('url-after-login') || '/places';
+      sessionStorage.removeItem('url-after-login');
+      this.props.history.push(urlAfterLogin);
+    } else {
+      this.props.UiStore.signupFormErrors = signupSuccessful;
+    }
   };
 
   render() {
@@ -36,6 +42,15 @@ export default class Signup extends Component {
       <FormContainer>
         <Form onSubmit={e => this.submitForm(e)}>
           <Heading2>Sign Up</Heading2>
+
+          {this.props.UiStore.signupFormErrors
+            ? this.props.UiStore.signupFormErrors.map(error => (
+                <p key={error} className="error">
+                  {error}
+                </p>
+              ))
+            : ''}
+
           <InputWrapper>
             <Label htmlFor="name" className="inputLabel">
               Name

@@ -46,19 +46,26 @@ class WanderersStore {
   login = async (email, password) => {
     const response = await this.authApi.login(email, password);
 
-    this.user = response.data;
-    sessionStorage.setItem('user', JSON.stringify(this.user));
-
-    return response;
+    if (response.data.error) {
+      return false;
+    } else {
+      this.user = response.data;
+      sessionStorage.setItem('user', JSON.stringify(this.user));
+      return true;
+    }
   };
 
   @action
   signup = async (name, email, password, image) => {
     const response = await this.authApi.signup(name, email, password, image);
 
-    this.user = response.data;
-    sessionStorage.setItem('user', JSON.stringify(this.user));
-    return response;
+    if (response.data.error) {
+      return response.data.error;
+    } else {
+      this.user = response.data;
+      sessionStorage.setItem('user', JSON.stringify(this.user));
+      return true;
+    }
   };
 
   @action

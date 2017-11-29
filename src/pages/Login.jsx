@@ -12,21 +12,27 @@ import {
   Action
 } from '../elements/form';
 
-@inject('WanderersStore')
+@inject('WanderersStore', 'UiStore')
 @observer
 export default class Login extends Component {
   submitForm = async e => {
     e.preventDefault();
+    this.props.UiStore.loginFormError = null;
 
-    const response = await this.props.WanderersStore.login(
+    const loginSuccessful = await this.props.WanderersStore.login(
       this.emailInput.value,
       this.passwordInput.value
     );
 
-    const urlAfterLogin =
-      sessionStorage.getItem('url-after-login') || '/places';
-    sessionStorage.removeItem('url-after-login');
-    this.props.history.push(urlAfterLogin);
+    if (loginSuccessful) {
+      const urlAfterLogin =
+        sessionStorage.getItem('url-after-login') || '/places';
+      sessionStorage.removeItem('url-after-login');
+      this.props.history.push(urlAfterLogin);
+    } else {
+      this.props.UiStore.loginFormError =
+        'Bummer! There are errors in your submission';
+    }
   };
 
   render() {
@@ -34,6 +40,12 @@ export default class Login extends Component {
       <FormContainer>
         <Form onSubmit={e => this.submitForm(e)}>
           <Heading2>Login</Heading2>
+
+          {this.props.UiStore.loginFormError ? (
+            <p className="error">{this.props.UiStore.loginFormError}</p>
+          ) : (
+            ''
+          )}
 
           <InputWrapper>
             <Label htmlFor="email" className="inputLabel">
