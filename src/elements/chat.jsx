@@ -36,6 +36,11 @@ const ChatBuddyList = styled.ul`
 const ChatBuddyListItem = styled.li`
   font-family: ${fonts.body};
   font-size: ${fontSizes.small};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${colors.pink};
+  font-weight: bold;
 `;
 
 export { ChatForm, ChatTextarea, ChatBuddyList, ChatBuddyListItem };

@@ -8,11 +8,12 @@ import {
   TripVisualization,
   TripsList,
   TripsListItem,
-  ListItemLine,
+  TripName,
   TripIcon
 } from '../elements/profile';
 
-import { Heading2 } from '../elements/form';
+import { Figure, CardImg, Figcaption } from '../elements/figure';
+
 import Scene from '../Scene';
 
 @inject('WanderersStore', 'UiStore')
@@ -84,8 +85,6 @@ export default class TripsListing extends Component {
     this.props.UiStore.visualImageStop = this.props.WanderersStore.stops.find(
       stop => stop.id === stopId
     );
-
-    // TweenMax.fromTo('.project-image img', 0.5, { width: 0 }, { width: 180 });
   };
 
   hideStopImage = () => {
@@ -99,9 +98,7 @@ export default class TripsListing extends Component {
 
     return (
       <ProfilePage>
-        <TripVisualization innerRef={section => (this.section = section)}>
-          Click on Circles
-        </TripVisualization>
+        <TripVisualization innerRef={section => (this.section = section)} />
 
         {UiStore.visualImageVisible && stop ? (
           <div
@@ -111,27 +108,28 @@ export default class TripsListing extends Component {
               left: UiStore.visualImagePositionX
             }}
           >
-            <img
-              src={
-                stop.place.place_images.length > 0
-                  ? stop.place.place_images[0].card_image
-                  : '/noimg.jpg'
-              }
-              alt={stop.place.name}
-            />
-            <p>{stop.place.name}</p>
+            <Figure>
+              <CardImg
+                src={
+                  stop.place.place_images.length > 0
+                    ? stop.place.place_images[0].card_image
+                    : '/noimg.jpg'
+                }
+                alt={stop.place.name}
+              />
+              <Figcaption>{stop.place.name.toUpperCase()}</Figcaption>
+            </Figure>
           </div>
         ) : (
           ''
         )}
 
         <UserTrips>
-          <Heading2>Your Trips</Heading2>
           <TripsList>
             {trips.map(trip => {
               return (
                 <TripsListItem key={trip.id}>
-                  <p>{trip.name}</p>
+                  <TripName>{trip.name}</TripName>
                   <TripIcon
                     src="/view.svg"
                     alt="view icon"
@@ -147,7 +145,7 @@ export default class TripsListing extends Component {
                   {WanderersStore.trip === trip ? (
                     <ul>
                       {WanderersStore.stops.map(stop => (
-                        <li key={stop.id}>
+                        <li className="stopName" key={stop.id}>
                           {stop.place.name}, {stop.place.city.country}
                         </li>
                       ))}
@@ -158,7 +156,6 @@ export default class TripsListing extends Component {
                 </TripsListItem>
               );
             })}
-            <ListItemLine />
           </TripsList>
         </UserTrips>
       </ProfilePage>

@@ -2,14 +2,6 @@ body {
   font-size: $body-font-size;
 }
 
-h1 {
-  font-size: $h1-font-size;
-  font-family: 'Anton', sans-serif;
-  padding: $spacing-small;
-  color: transparent;
-  -webkit-text-stroke: 1px #fff;
-}
-
 h3 {
   position: absolute;
   left: 8vw;
@@ -19,4 +11,9 @@ h3 {
   text-align: center;
   text-decoration-line: underline;
   font-family: $headings-font;
+}
+
+.stopName {
+  font-size: $body-font-size;
+  margin-bottom: 10px;
 }

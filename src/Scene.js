@@ -93,7 +93,10 @@ export default class Scene {
         anchor.add(line);
 
         const circleGeometry = new THREE.CircleGeometry(0.3, 64);
-        const circleMaterial = new THREE.MeshBasicMaterial({ color: 0xb9a7c2 });
+        const circleMaterial = new THREE.MeshBasicMaterial({
+          color: 0x6f3662,
+          opacity: 0.8
+        });
         const circle = new THREE.Mesh(circleGeometry, circleMaterial);
         circle.position.x += this.randomize(5, lineLength);
         TweenMax.fromTo(
@@ -110,7 +113,8 @@ export default class Scene {
             64
           );
           const circleTwoMaterial = new THREE.MeshBasicMaterial({
-            color: 0xceffce
+            color: 0xffab91,
+            opacity: 0.9
           });
           const circleTwo = new THREE.Mesh(
             circleTwoGeometry,

@@ -105,14 +105,13 @@ export default class ShowTrip extends Component {
 
     return (
       <div>
-        <h3>{trip.name}</h3>
-        Trip Buddies:
         <ChatBuddyList>
           {WanderersStore.buddies.map(buddy => (
             <ChatBuddyListItem key={buddy.id}>
-              {buddy.name}{' '}
+              <p>{buddy.name} </p>
               <img
                 src="/videoChat.svg"
+                className="videoIcon"
                 alt="chat icon"
                 onClick={e => this.startChat(e, buddy.user_id)}
               />

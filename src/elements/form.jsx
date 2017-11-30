@@ -8,6 +8,10 @@ const FormContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1296px) {
+    margin-left: 0px;
+  }
 `;
 
 const Form = styled.form`
@@ -19,8 +23,13 @@ const Form = styled.form`
 `;
 
 const BuddyFormContainer = styled.div`
-  width: 50%;
-  display: none;
+  padding: 20px;
+  width: 30%;
+  position: absolute;
+  top: 75%;
+  z-index: 15;
+  background-color: ${colors.lightGrey};
+  color: ${colors.white};
 `;
 
 const Heading2 = styled.h2`
@@ -29,20 +38,28 @@ const Heading2 = styled.h2`
   color: ${colors.white};
   text-align: center;
   font-family: ${fonts.headings};
+
+  @media (max-width: 1296px) {
+    margin-top: 0px;
+  }
 `;
 
 const Label = styled.label`
   font-size: ${fontSizes.small};
   font-family: ${fonts.body};
   text-decoration: underline;
-  color: ${colors.white};
+  color: ${colors.gray};
   text-transform: uppercase;
   margin-bottom: ${margin.mini};
   display: block;
 `;
 
 const InputWrapper = styled.div`
-  width: 40%;
+  width: 50%;
+
+  @media (max-width: 1296px) {
+    width: 80%;
+  }
 `;
 
 const Input = styled.input`
@@ -79,13 +96,13 @@ const Action = styled.button`
   margin: ${margin.mini};
   width: 10rem;
   background-color: transparent;
-  color: ${colors.white};
+  color: ${colors.gray};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: background-color 1s ease;
 
   &:hover {
     cursor: pointer;
-    background-color: ${colors.black};
+    background-color: ${colors.lightPurple};
     color: ${colors.white};
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }

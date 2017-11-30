@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { NavStyle, NavLink } from '../elements/nav';
+import { NavStyle, NavLink, InnerList } from '../elements/nav';
 
 @inject('WanderersStore')
 @observer
@@ -16,12 +16,12 @@ export default class Nav extends Component {
           <NavLink to="/">HOME</NavLink>
         </div>
         {user ? (
-          <ul>
+          <InnerList>
             <li>
               <NavLink to="/trips">MY TRIPS</NavLink>
             </li>
             <li>
-              <NavLink to="/places">MAP SEARCH</NavLink>
+              <NavLink to="/places">MAP</NavLink>
             </li>
             <li>
               <NavLink to="/trips/new">PLAN TRIP</NavLink>
@@ -29,9 +29,9 @@ export default class Nav extends Component {
             <li>
               <NavLink to="/logout">LOG OUT</NavLink>
             </li>
-          </ul>
+          </InnerList>
         ) : (
-          <ul>
+          <InnerList>
             <li>
               <NavLink to="/signup">SIGN UP</NavLink>
             </li>
@@ -39,9 +39,11 @@ export default class Nav extends Component {
               <NavLink to="/login">LOGIN</NavLink>
             </li>
             <li>
-              <NavLink to="/">FACEBOOK</NavLink>
+              <NavLink to="/">
+                <img src="/facebook.svg" alt="facebook icon" />
+              </NavLink>
             </li>
-          </ul>
+          </InnerList>
         )}
       </NavStyle>
     );
