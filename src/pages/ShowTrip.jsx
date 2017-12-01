@@ -12,25 +12,32 @@ import { VideoContainer, VideoTag, VideoBtn } from '../elements/video';
 
 import Peer from 'peerjs';
 
+// for now localhost only
+const enablePeer = window.location.host.indexOf('localhost') >= 0;
+
 @inject('WanderersStore', 'UiStore')
 @observer
 export default class ShowTrip extends Component {
   constructor(props) {
     super(props);
 
-    // this.peer = new Peer(this.props.WanderersStore.user.id, {
-    //   key: 'rfgj72lpk6fg8pvi'
-    // });
+    if (enablePeer) {
+      this.peer = new Peer(this.props.WanderersStore.user.id, {
+        key: 'rfgj72lpk6fg8pvi'
+      });
+    }
 
     this.call = null;
   }
 
   componentDidMount() {
     // person who receives call
-    // this.peer.on('call', call => {
-    //   this.call = call;
-    //   this.props.UiStore.showAnswerCall = true;
-    // });
+    if (enablePeer) {
+      this.peer.on('call', call => {
+        this.call = call;
+        this.props.UiStore.showAnswerCall = true;
+      });
+    }
   }
 
   answerCall = e => {
@@ -111,7 +118,7 @@ export default class ShowTrip extends Component {
           {WanderersStore.buddies.map(buddy => (
             <ChatBuddyListItem key={buddy.id}>
               <p>{buddy.name} </p>
-              {buddy.user_id !== WanderersStore.user.id ? (
+              {enablePeer && buddy.user_id !== WanderersStore.user.id ? (
                 <img
                   src="/videoChat.svg"
                   className="videoIcon"

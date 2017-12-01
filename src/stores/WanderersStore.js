@@ -105,7 +105,12 @@ class WanderersStore {
     this.setupSubscription(id);
     this.loadMessages(id);
     this.loadBuddies(id);
-    this.loadStops(id);
+    await this.loadStops(id);
+
+    if (this.stops.length > 0) {
+      this.viewport.latitude = this.stops[0].place.latitude;
+      this.viewport.longitude = this.stops[0].place.longitude;
+    }
   };
 
   @action
