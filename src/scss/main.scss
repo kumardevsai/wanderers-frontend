@@ -3,8 +3,6 @@
 @import 'settings/fonts';
 @import 'settings/spacing';
 
-@import 'components/geosuggest';
-
 @import 'tools/breakpoint_mixin';
 @import 'tools/button_mixin';
 
@@ -17,5 +15,7 @@
 
 @import 'objects/avatar';
 @import 'objects/buttons';
+
+@import 'components/geosuggest';
 
 @import 'trumps/clearfix';

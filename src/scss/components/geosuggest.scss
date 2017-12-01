@@ -85,3 +85,31 @@
 .geosuggest__item__matched-text {
   font-weight: bold;
 }
+
+.geosuggest {
+  width: 20vw;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background-color: #fff;
+}
+
+.geosuggest__input {
+  background-color: #fff;
+  width: 20vw;
+  max-width: 100%;
+  padding: 15px;
+  font-size: 14px;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #9068be;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.geosuggest__input:focus,
+.geosuggest__suggests:focus {
+  outline: none;
+  border: 3px solid #dcae1d !important;
+}
+
+.geosuggest__suggests {
+  /*width: 21vw;*/
+}
