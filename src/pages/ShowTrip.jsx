@@ -133,30 +133,35 @@ export default class ShowTrip extends Component {
         </ChatBuddyList>
         <SearchMap />
         <BuddyForm />
-        {this.props.UiStore.showAnswerCall ? (
-          <VideoBtn onClick={e => this.answerCall(e)}>Answer Call</VideoBtn>
-        ) : (
-          ''
-        )}
+
         <VideoContainer
           style={{
-            display: this.props.UiStore.callInProgress ? 'block' : 'none'
+            display:
+              this.props.UiStore.callInProgress ||
+              this.props.UiStore.showAnswerCall
+                ? 'block'
+                : 'none'
           }}
         >
-          <VideoBtn onClick={e => this.stopCall(e)}>Hang up</VideoBtn>
           <VideoTag
-            ref={video => {
+            innerRef={video => {
               this.localVideo = video;
             }}
             autoPlay
             muted
           />
           <VideoTag
-            ref={video => {
+            innerRef={video => {
               this.remoteVideo = video;
             }}
             autoPlay
           />
+
+          {this.props.UiStore.showAnswerCall ? (
+            <VideoBtn onClick={e => this.answerCall(e)}>Answer Call</VideoBtn>
+          ) : (
+            <VideoBtn onClick={e => this.stopCall(e)}>Hang up</VideoBtn>
+          )}
         </VideoContainer>
         <Chat />
         <MapGL />
