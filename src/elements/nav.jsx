@@ -13,13 +13,13 @@ const NavStyle = styled.nav`
   justify-content: center;
   flex-direction: column;
   background-color: ${colors.lightPurple};
+  z-index: 10;
 
   @media (max-width: 1296px) {
     position: static;
     width: 100%;
     display: flex;
     flex-direction: row;
-    z-index: 10;
   }
 `;
 

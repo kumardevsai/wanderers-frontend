@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 
 class UiStore {
   @observable showBuddyForm = false;
+  @observable showChat = false;
   @observable showAnswerCall = false;
   @observable callInProgress = false;
   @observable loginFormError = null;

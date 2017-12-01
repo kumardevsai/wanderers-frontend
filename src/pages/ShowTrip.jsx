@@ -9,6 +9,7 @@ import Chat from '../components/Chat';
 
 import { ChatBuddyList, ChatBuddyListItem } from '../elements/chat';
 import { VideoContainer, VideoTag, VideoBtn } from '../elements/video';
+import { TriggerChat, TriggerBuddy } from '../elements/triggers';
 
 import Peer from 'peerjs';
 
@@ -38,6 +39,13 @@ export default class ShowTrip extends Component {
         this.props.UiStore.showAnswerCall = true;
       });
     }
+
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Escape') {
+        this.props.UiStore.showBuddyForm = false;
+        this.props.UiStore.showChat = false;
+      }
+    });
   }
 
   answerCall = e => {
@@ -105,7 +113,7 @@ export default class ShowTrip extends Component {
   };
 
   render() {
-    const { WanderersStore } = this.props;
+    const { WanderersStore, UiStore } = this.props;
     const trip = WanderersStore.trip;
 
     if (!trip) {
@@ -132,7 +140,19 @@ export default class ShowTrip extends Component {
           ))}
         </ChatBuddyList>
         <SearchMap />
-        <BuddyForm />
+        {UiStore.showBuddyForm ? (
+          <BuddyForm />
+        ) : (
+          <TriggerBuddy
+            className="btn"
+            onClick={e => {
+              e.preventDefault();
+              UiStore.showBuddyForm = true;
+            }}
+          >
+            INVITE BUDDY
+          </TriggerBuddy>
+        )}
 
         <VideoContainer
           style={{
@@ -163,7 +183,21 @@ export default class ShowTrip extends Component {
             <VideoBtn onClick={e => this.stopCall(e)}>Hang up</VideoBtn>
           )}
         </VideoContainer>
-        <Chat />
+
+        {UiStore.showChat ? (
+          <Chat />
+        ) : (
+          <TriggerChat
+            className="btn"
+            onClick={e => {
+              e.preventDefault();
+              UiStore.showChat = true;
+            }}
+          >
+            CHAT
+          </TriggerChat>
+        )}
+
         <MapGL />
       </div>
     );
