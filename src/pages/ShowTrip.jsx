@@ -27,10 +27,10 @@ export default class ShowTrip extends Component {
 
   componentDidMount() {
     // person who receives call
-    this.peer.on('call', call => {
-      this.call = call;
-      this.props.UiStore.showAnswerCall = true;
-    });
+    // this.peer.on('call', call => {
+    //   this.call = call;
+    //   this.props.UiStore.showAnswerCall = true;
+    // });
   }
 
   answerCall = e => {
