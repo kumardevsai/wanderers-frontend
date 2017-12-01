@@ -2,7 +2,12 @@ import React from 'react';
 
 import { observer, inject } from 'mobx-react';
 
-import { ChatForm, ChatTextarea } from '../elements/chat';
+import {
+  ChatArea,
+  MessagesContainer,
+  MessageUserName,
+  ChatTextarea
+} from '../elements/chat';
 import { FilledButton } from '../elements/form';
 
 @inject('WanderersStore')
@@ -18,30 +23,30 @@ export default class Chat extends React.Component {
   render() {
     const { WanderersStore } = this.props;
     return (
-      <div>
-        <div className="messages">
+      <ChatArea>
+        <MessagesContainer>
           {WanderersStore.messages.map(message => (
             <div className="msg" key={message.id}>
-              <div className="msg_user_name">{message.name}</div>
+              <MessageUserName>{message.name}</MessageUserName>
               <div className="msg_content">{message.text}</div>
             </div>
           ))}
-        </div>
+        </MessagesContainer>
 
         <section className="messageForm">
-          <ChatForm
+          <form
             onSubmit={e => {
               this.submitForm(e);
             }}
           >
             <ChatTextarea
-              ref={area => (this.content = area)}
+              innerRef={area => (this.content = area)}
               placeholder="YOUR MESSAGE"
             />
             <FilledButton type="submit">SEND</FilledButton>
-          </ChatForm>
+          </form>
         </section>
-      </div>
+      </ChatArea>
     );
   }
 }

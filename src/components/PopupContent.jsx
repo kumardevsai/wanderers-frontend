@@ -20,9 +20,10 @@ export default class PopupContent extends Component {
 
     return (
       <Figure>
-        {firstImage ? (
-          <CardImg src={firstImage.card_image} alt={place.name} />
-        ) : null}
+        <CardImg
+          src={firstImage ? firstImage.card_image : '/noimg.jpg'}
+          alt={place.name}
+        />
         <hr />
         <Figcaption>{place.name.toUpperCase()}</Figcaption>
         <PopupAction place={place} />

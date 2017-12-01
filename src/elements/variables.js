@@ -24,6 +24,7 @@ export const margin = {
 };
 
 export const padding = {
+  ultramini: '5px',
   mini: '15px',
   small: '30px',
   medium: '50px',

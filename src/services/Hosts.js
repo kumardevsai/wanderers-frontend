@@ -1,10 +1,19 @@
 class Hosts {
   placesHost = () => {
-    return 'http://localhost:5000';
+    // if i'm in prod
+    if (window.location.host.indexOf('localhost') === -1) {
+      return 'https://wanderers-places.herokuapp.com';
+    } else {
+      return 'http://localhost:5000';
+    }
   };
 
   authHost = () => {
-    return 'http://local.auth.wanderers.com:4000';
+    if (window.location.host.indexOf('localhost') === -1) {
+      return 'https://wanderers-auth.herokuapp.com';
+    } else {
+      return 'http://local.auth.wanderers.com:4000';
+    }
   };
 }
 

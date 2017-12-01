@@ -27,7 +27,10 @@ export default class TripsListing extends Component {
 
   componentDidMount() {
     this.hideOnEscape();
+
     if (this.props.WanderersStore.trip) {
+      this.showVisualTrip(this.props.WanderersStore.trip);
+    } else if (this.props.WanderersStore.trips.length !== 0) {
       this.showVisualTrip(this.props.WanderersStore.trips[0]);
     }
   }

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
 import { observer, inject } from 'mobx-react';
-import { ChatBuddyList, ChatBuddyListItem } from '../elements/chat';
 
 import MapGL from '../components/MapGL';
 import BuddyForm from '../components/BuddyForm';
 import SearchMap from '../components/SearchMap';
 import Chat from '../components/Chat';
+
+import { ChatBuddyList, ChatBuddyListItem } from '../elements/chat';
+import { VideoContainer, VideoTag, VideoBtn } from '../elements/video';
 
 import Peer from 'peerjs';
 
@@ -100,7 +102,7 @@ export default class ShowTrip extends Component {
     const trip = WanderersStore.trip;
 
     if (!trip) {
-      return 'Loading';
+      return '🤘';
     }
 
     return (
@@ -109,43 +111,46 @@ export default class ShowTrip extends Component {
           {WanderersStore.buddies.map(buddy => (
             <ChatBuddyListItem key={buddy.id}>
               <p>{buddy.name} </p>
-              <img
-                src="/videoChat.svg"
-                className="videoIcon"
-                alt="chat icon"
-                onClick={e => this.startChat(e, buddy.user_id)}
-              />
+              {buddy.user_id !== WanderersStore.user.id ? (
+                <img
+                  src="/videoChat.svg"
+                  className="videoIcon"
+                  alt="chat icon"
+                  onClick={e => this.startChat(e, buddy.user_id)}
+                />
+              ) : (
+                ''
+              )}
             </ChatBuddyListItem>
           ))}
         </ChatBuddyList>
         <SearchMap />
         <BuddyForm />
         {this.props.UiStore.showAnswerCall ? (
-          <button onClick={e => this.answerCall(e)}>Answer Call</button>
+          <VideoBtn onClick={e => this.answerCall(e)}>Answer Call</VideoBtn>
         ) : (
           ''
         )}
-        <div
-          className="videoWrapper"
+        <VideoContainer
           style={{
             display: this.props.UiStore.callInProgress ? 'block' : 'none'
           }}
         >
-          <button onClick={e => this.stopCall(e)}>Hang up</button>
-          <video
+          <VideoBtn onClick={e => this.stopCall(e)}>Hang up</VideoBtn>
+          <VideoTag
             ref={video => {
               this.localVideo = video;
             }}
             autoPlay
             muted
           />
-          <video
+          <VideoTag
             ref={video => {
               this.remoteVideo = video;
             }}
             autoPlay
           />
-        </div>
+        </VideoContainer>
         <Chat />
         <MapGL />
       </div>

@@ -1,20 +1,42 @@
 import styled from 'styled-components';
-import { colors, fontSizes, fonts, margin, padding } from './variables';
+import { colors, fontSizes, fonts, padding, margin } from './variables';
 
-const ChatForm = styled.form`
-  width: 30vw;
+const ChatArea = styled.div`
+  box-sizing: border-box;
+  overflow: hidden;
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   right: 0;
+  padding-bottom: ${padding.small};
   z-index: 5;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  margin: 0px;
+`;
+
+const MessagesContainer = styled.div`
+  background-color: ${colors.white};
+  border: 1px solid ${colors.black};
+  margin-bottom: ${margin.mini};
+  padding: ${margin.mini};
+  font-family: ${fonts.body};
+  color: ${colors.pink};
+  max-height: 30vh;
+  overflow-y: scroll;
+`;
+
+const MessageUserName = styled.div`
+  background-color: ${colors.pink};
+  color: ${colors.lightPurple};
+  width: 30%;
+  padding: ${padding.ultramini};
+  margin-bottom: ${padding.ultramini};
 `;
 
 const ChatTextarea = styled.textarea`
-  width: 70%;
+  width: 100%;
   padding: 10px;
   align-self: flex-end;
   font-family: ${fonts.body};
@@ -41,6 +63,16 @@ const ChatBuddyListItem = styled.li`
   align-items: center;
   color: ${colors.pink};
   font-weight: bold;
+  padding: ${padding.mini};
+  background-color: ${colors.white};
+  margin: ${padding.ultramini};
 `;
 
-export { ChatForm, ChatTextarea, ChatBuddyList, ChatBuddyListItem };
+export {
+  ChatArea,
+  MessagesContainer,
+  MessageUserName,
+  ChatTextarea,
+  ChatBuddyList,
+  ChatBuddyListItem
+};
