@@ -18,9 +18,9 @@ export default class ShowTrip extends Component {
   constructor(props) {
     super(props);
 
-    this.peer = new Peer(this.props.WanderersStore.user.id, {
-      key: 'rfgj72lpk6fg8pvi'
-    });
+    // this.peer = new Peer(this.props.WanderersStore.user.id, {
+    //   key: 'rfgj72lpk6fg8pvi'
+    // });
 
     this.call = null;
   }
