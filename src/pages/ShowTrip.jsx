@@ -126,7 +126,9 @@ export default class ShowTrip extends Component {
           {WanderersStore.buddies.map(buddy => (
             <ChatBuddyListItem key={buddy.id}>
               <p>{buddy.name} </p>
-              {enablePeer && buddy.user_id !== WanderersStore.user.id ? (
+              {false &&
+              enablePeer &&
+              buddy.user_id !== WanderersStore.user.id ? (
                 <img
                   src="/videoChat.svg"
                   className="videoIcon"
