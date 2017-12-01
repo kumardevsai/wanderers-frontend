@@ -20,7 +20,7 @@ export default class PopupAction extends Component {
     } else if (stop) {
       return (
         <button
-          className="btn"
+          className="btn block-btn"
           onClick={e => {
             e.preventDefault();
             WanderersStore.removeStopFromTrip(stop.id);
@@ -32,7 +32,7 @@ export default class PopupAction extends Component {
     } else {
       return (
         <button
-          className="btn"
+          className="btn block-btn"
           onClick={e => {
             e.preventDefault();
             WanderersStore.addStopToTrip(place.id);

@@ -18,13 +18,13 @@ export default class Nav extends Component {
         {user ? (
           <InnerList>
             <li>
+              <NavLink to="/trips/new">PLAN TRIP</NavLink>
+            </li>
+            <li>
               <NavLink to="/trips">MY TRIPS</NavLink>
             </li>
             <li>
               <NavLink to="/places">MAP</NavLink>
-            </li>
-            <li>
-              <NavLink to="/trips/new">PLAN TRIP</NavLink>
             </li>
             <li>
               <NavLink to="/logout">LOG OUT</NavLink>
