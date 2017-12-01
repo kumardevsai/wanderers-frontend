@@ -108,8 +108,8 @@ class WanderersStore {
     await this.loadStops(id);
 
     if (this.stops.length > 0) {
-      this.viewport.latitude = this.stops[0].place.latitude;
-      this.viewport.longitude = this.stops[0].place.longitude;
+      this.viewport.latitude = this.stops[0].place.lat;
+      this.viewport.longitude = this.stops[0].place.lon;
     }
   };
 
