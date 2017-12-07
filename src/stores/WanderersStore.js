@@ -195,6 +195,38 @@ class WanderersStore {
     const response = await this.placesApi.loadStops(this.user.token, tripId);
     this.stops = response.data;
   };
+
+  @action
+  markTripCompleted = async (trip, completed) => {
+    this.trip.completed = completed;
+    this.trip.completed_at = trip.completed ? new Date() : null;
+    this.trips = this.trips.map(arrTrip => {
+      if (arrTrip === trip) {
+        arrTrip = this.trip;
+      }
+      return arrTrip;
+    });
+
+    await this.placesApi.updateTrip(this.user.token, trip.id, {
+      completed_at: completed ? new Date() : null
+    });
+  };
+
+  @action
+  markTripRated = async (trip, rating) => {
+    this.trip.rating = rating;
+
+    this.trips = this.trips.map(arrTrip => {
+      if (arrTrip === trip) {
+        arrTrip = this.trip;
+      }
+      return arrTrip;
+    });
+
+    await this.placesApi.updateTrip(this.user.token, trip.id, {
+      rating: rating
+    });
+  };
 }
 
 const singleton = new WanderersStore();

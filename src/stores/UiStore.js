@@ -12,6 +12,7 @@ class UiStore {
   @observable visualImagePositionX = null;
   @observable visualImagePositionY = null;
   @observable visualImageStop = null;
+  @observable showSelected = 'stops';
 }
 
 const singleton = new UiStore();

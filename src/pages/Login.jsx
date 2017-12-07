@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
 import {
   FormContainer,
@@ -26,7 +27,7 @@ export default class Login extends Component {
 
     if (loginSuccessful) {
       const urlAfterLogin =
-        sessionStorage.getItem('url-after-login') || '/places';
+        sessionStorage.getItem('url-after-login') || '/trips';
       sessionStorage.removeItem('url-after-login');
       this.props.history.push(urlAfterLogin);
     } else {
@@ -77,7 +78,9 @@ export default class Login extends Component {
 
           <ActionsContainer>
             <Action type="submit">LOGIN</Action>
-            <Action>CANCEL</Action>
+            <Link to="/" className="btn">
+              CANCEL
+            </Link>
           </ActionsContainer>
         </Form>
       </FormContainer>

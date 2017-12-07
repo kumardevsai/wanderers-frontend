@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 
+import moment from 'moment';
+
 import {
   ProfilePage,
   UserTrips,
@@ -62,6 +64,114 @@ export default class TripsListing extends Component {
       this.showStopImage,
       this.hideStopImage
     );
+  };
+
+  showSelected = trip => {
+    const { WanderersStore, UiStore } = this.props;
+
+    if (WanderersStore.trip !== trip) return null;
+
+    if (UiStore.showSelected === 'stops') {
+      return (
+        <ul>
+          {WanderersStore.stops.map(stop => (
+            <li className="stopName" key={stop.id}>
+              {stop.place.name},{' '}
+              {stop.place.city.country.slice(0, 3).toUpperCase()}
+            </li>
+          ))}
+        </ul>
+      );
+    } else if (UiStore.showSelected === 'edit') {
+      return (
+        <form>
+          <label htmlFor="checkbox">
+            {trip.completed ? (
+              <span>
+                Trip Completed {moment(trip.completed_at).fromNow()}
+                <br /> Trip not completed?
+              </span>
+            ) : (
+              'Mark Trip as Completed'
+            )}
+            <input
+              type="checkbox"
+              name=""
+              id="checkbox"
+              checked={trip.completed}
+              onChange={e => {
+                this.tripCompleted(trip, e);
+              }}
+            />
+          </label>
+
+          {trip.completed ? (
+            <div className="rating">
+              <input
+                type="radio"
+                name="rating"
+                value="1"
+                checked={trip.rating === 1}
+                onChange={e => {
+                  this.tripRated(trip, e);
+                }}
+              />{' '}
+              1
+              <input
+                type="radio"
+                name="rating"
+                value="2"
+                checked={trip.rating === 2}
+                onChange={e => {
+                  this.tripRated(trip, e);
+                }}
+              />{' '}
+              2
+              <input
+                type="radio"
+                name="rating"
+                value="3"
+                checked={trip.rating === 3}
+                onChange={e => {
+                  this.tripRated(trip, e);
+                }}
+              />{' '}
+              3
+              <input
+                type="radio"
+                name="rating"
+                value="4"
+                checked={trip.rating === 4}
+                onChange={e => {
+                  this.tripRated(trip, e);
+                }}
+              />{' '}
+              4
+              <input
+                type="radio"
+                name="rating"
+                value="5"
+                checked={trip.rating === 5}
+                onChange={e => {
+                  this.tripRated(trip, e);
+                }}
+              />{' '}
+              5
+            </div>
+          ) : (
+            ''
+          )}
+        </form>
+      );
+    }
+  };
+
+  tripCompleted = (trip, e) => {
+    this.props.WanderersStore.markTripCompleted(trip, e.target.checked);
+  };
+
+  tripRated = (trip, e) => {
+    this.props.WanderersStore.markTripRated(trip, parseInt(e.target.value));
   };
 
   preloadImages = () => {
@@ -139,23 +249,23 @@ export default class TripsListing extends Component {
                     onClick={e => {
                       e.preventDefault();
                       this.showVisualTrip(trip);
+                      UiStore.showSelected = 'stops';
                     }}
                   />
                   <Link to={`/trips/${trip.id}`}>
-                    <TripIcon src="/edit.svg" alt="edit icon" />
+                    <TripIcon src="/world.svg" alt="map icon" />
                   </Link>
+                  <TripIcon
+                    src="/edit.svg"
+                    alt="edit icon"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.showVisualTrip(trip);
+                      UiStore.showSelected = 'edit';
+                    }}
+                  />
 
-                  {WanderersStore.trip === trip ? (
-                    <ul>
-                      {WanderersStore.stops.map(stop => (
-                        <li className="stopName" key={stop.id}>
-                          {stop.place.name}, {stop.place.city.country}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    ''
-                  )}
+                  {this.showSelected(trip)}
                 </TripsListItem>
               );
             })}

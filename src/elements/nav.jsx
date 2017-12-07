@@ -1,55 +1,69 @@
 import styled from 'styled-components';
-import { colors, fonts } from './variables';
+import { colors, fonts, padding, margin } from './variables';
 
 import { Link } from 'react-router-dom';
 
-const NavStyle = styled.nav`
+const NavWrapper = styled.div`
+  z-index: 500;
   position: fixed;
   left: 0;
-  bottom: 0;
   top: 0;
-  width: 7vw;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  bottom: 0;
   background-color: ${colors.lightPurple};
-  z-index: 10;
+  width: 7vw;
+`;
+
+const Navigation = styled.nav`
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
 
   @media (max-width: 1296px) {
-    position: static;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+  }
+`;
+
+const List = styled.ul`
+  width: 100%;
+  height: 33.3%;
+  flex-grow: 1;
+
+  @media (max-width: 1296px) {
   }
 `;
 
 const NavLink = styled(Link)`
-  font-family: ${fonts.body};
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  margin: 0 auto;
-  height: 50px;
   color: ${colors.white};
+  font-family: ${fonts.nav};
+  display: flex;
+  padding: ${padding.mini};
+  margin-top: ${margin.mini};
+  height: 33.33%;
+  width: 100%;
+  font-weight: bold;
   transition: background-color 1s ease;
 
   &:hover {
-    background-color: ${colors.pink};
+    color: ${colors.white};
+  }
+
+  &:before {
+    position: absolute;
+    margin-top: 20px;
+    left: -10%;
+    width: 0px;
+    display: block;
+    content: '';
+    height: 3px;
+    background: ${colors.darkBlue};
+    transition: width 0.5s ease;
+  }
+
+  &:hover:before {
+    width: 110%;
   }
 
   @media (max-width: 1296px) {
-    width: 100%;
-    height: 7vh;
-    padding-right: 10px;
-    flex-direction: row;
   }
 `;
 
-const InnerList = styled.ul`
-  @media (max-width: 1296px) {
-    display: flex;
-    width: 70%;
-  }
-`;
-
-export { NavStyle, NavLink, InnerList };
+export { NavWrapper, Navigation, List, NavLink };

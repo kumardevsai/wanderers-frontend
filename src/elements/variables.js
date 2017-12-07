@@ -2,12 +2,15 @@ export const colors = {
   lightGrey: '#D9E1E8',
   gray: '#8C95AA',
   darkBlue: '#03243A',
+  babyBlue: '#c2dfea',
   white: '#FFFFFF',
   black: '#212121',
   lillac: '#9068BE',
   lightPurple: '#b9a7c2',
   offwhite: '#FFFCEC',
-  pink: '#6F3662'
+  salmon: '#E94C6F',
+  pink: '#6F3662',
+  yellow: '#F2C640'
 };
 
 export const fontSizes = {
@@ -34,5 +37,6 @@ export const padding = {
 export const fonts = {
   body: 'Roboto Condensed, sans-serif',
   h1Heading: 'Fjalla One, sans-serif',
+  nav: 'Nixie One, cursive',
   headings: 'Roboto Condensed, sans-serif'
 };

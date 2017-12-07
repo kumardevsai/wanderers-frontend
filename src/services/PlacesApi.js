@@ -13,6 +13,12 @@ export default class PlacesApi {
     });
   }
 
+  headers = user_token => ({
+    headers: {
+      Authorization: `Bearer ${user_token}`
+    }
+  });
+
   search = (user_token, lat, lon) => {
     // get info from #places from places-ms
     return this.api.get(
@@ -21,11 +27,7 @@ export default class PlacesApi {
         lat,
         lon
       },
-      {
-        headers: {
-          Authorization: `Bearer ${user_token}`
-        }
-      }
+      this.headers(user_token)
     );
   };
 
@@ -36,28 +38,16 @@ export default class PlacesApi {
       {
         name
       },
-      {
-        headers: {
-          Authorization: `Bearer ${user_token}`
-        }
-      }
+      this.headers(user_token)
     );
   };
 
   loadTrip = (user_token, id) => {
-    return this.api.get(
-      `/trips/${id}`,
-      {},
-      { headers: { Authorization: `Bearer ${user_token}` } }
-    );
+    return this.api.get(`/trips/${id}`, {}, this.headers(user_token));
   };
 
   loadTrips = user_token => {
-    return this.api.get(
-      `/trips`,
-      {},
-      { headers: { Authorization: `Bearer ${user_token}` } }
-    );
+    return this.api.get(`/trips`, {}, this.headers(user_token));
   };
 
   sendInvitation = (user_token, email, trip_id) => {
@@ -66,11 +56,7 @@ export default class PlacesApi {
       {
         email
       },
-      {
-        headers: {
-          Authorization: `Bearer ${user_token}`
-        }
-      }
+      this.headers(user_token)
     );
   };
 
@@ -78,11 +64,7 @@ export default class PlacesApi {
     return this.api.post(
       `/trips/${tripId}/buddies`,
       {},
-      {
-        headers: {
-          Authorization: `Bearer ${user_token}`
-        }
-      }
+      this.headers(user_token)
     );
   };
 
@@ -90,7 +72,7 @@ export default class PlacesApi {
     return this.api.get(
       `/trips/${tripId}/messages`,
       {},
-      { headers: { Authorization: `Bearer ${user_token}` } }
+      this.headers(user_token)
     );
   };
 
@@ -98,7 +80,7 @@ export default class PlacesApi {
     return this.api.get(
       `/trips/${tripId}/buddies`,
       {},
-      { headers: { Authorization: `Bearer ${user_token}` } }
+      this.headers(user_token)
     );
   };
 
@@ -106,11 +88,7 @@ export default class PlacesApi {
     return this.api.post(
       `/trips/${tripId}/stops`,
       { place_id: placeId },
-      {
-        headers: {
-          Authorization: `Bearer ${user_token}`
-        }
-      }
+      this.headers(user_token)
     );
   };
 
@@ -118,19 +96,15 @@ export default class PlacesApi {
     return this.api.delete(
       `/trips/${tripId}/stops/${stopId}`,
       {},
-      {
-        headers: {
-          Authorization: `Bearer ${user_token}`
-        }
-      }
+      this.headers(user_token)
     );
   };
 
   loadStops = (user_token, tripId) => {
-    return this.api.get(
-      `/trips/${tripId}/stops`,
-      {},
-      { headers: { Authorization: `Bearer ${user_token}` } }
-    );
+    return this.api.get(`/trips/${tripId}/stops`, {}, this.headers(user_token));
+  };
+
+  updateTrip = (user_token, tripId, fields) => {
+    return this.api.put(`/trips/${tripId}`, fields, this.headers(user_token));
   };
 }

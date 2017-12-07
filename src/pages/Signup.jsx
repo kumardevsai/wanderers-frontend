@@ -29,7 +29,7 @@ export default class Signup extends Component {
 
     if (signupSuccessful === true) {
       const urlAfterLogin =
-        sessionStorage.getItem('url-after-login') || '/places';
+        sessionStorage.getItem('url-after-login') || '/trips/new';
       sessionStorage.removeItem('url-after-login');
       this.props.history.push(urlAfterLogin);
     } else {
