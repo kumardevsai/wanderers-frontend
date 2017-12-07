@@ -106,7 +106,7 @@ class WanderersStore {
     this.setupSubscription(id);
     this.loadMessages(id);
     this.loadBuddies(id);
-    this.loadVideoToken(id);
+    await this.loadVideoToken(id);
     await this.loadStops(id);
 
     if (this.stops.length > 0) {

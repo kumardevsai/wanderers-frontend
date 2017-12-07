@@ -9,6 +9,14 @@ const TriggerChat = styled.button`
   display: inline-block !important;
 `;
 
+const TriggerVideo = styled.button`
+  position: absolute;
+  bottom: 5px;
+  right: 150px;
+  z-index: 5;
+  display: inline-block !important;
+`;
+
 const TriggerBuddy = styled.button`
   position: absolute;
   bottom: 5px;
@@ -17,4 +25,4 @@ const TriggerBuddy = styled.button`
   display: inline-block !important;
 `;
 
-export { TriggerChat, TriggerBuddy };
+export { TriggerChat, TriggerBuddy, TriggerVideo };

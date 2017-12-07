@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { observer, inject } from 'mobx-react';
 
 import MapGL from '../components/MapGL';
@@ -8,8 +7,10 @@ import SearchMap from '../components/SearchMap';
 import Chat from '../components/Chat';
 
 import { ChatBuddyList, ChatBuddyListItem } from '../elements/chat';
-import { VideoContainer, VideoTag, VideoBtn } from '../elements/video';
-import { TriggerChat, TriggerBuddy } from '../elements/triggers';
+import { VideoContainer, VideoBtn } from '../elements/video';
+import { TriggerChat, TriggerVideo, TriggerBuddy } from '../elements/triggers';
+
+import Video from 'twilio-video';
 
 @inject('WanderersStore', 'UiStore')
 @observer
@@ -22,6 +23,74 @@ export default class ShowTrip extends Component {
       }
     });
   }
+
+  newParticipant = participant => {
+    const participantContainer = document.createElement('div');
+    participantContainer.id = participant.sid;
+    participantContainer.className = 'participantContainer';
+
+    participant.tracks.forEach(track => {
+      participantContainer.appendChild(track.attach());
+    });
+    participant.on('trackAdded', track => {
+      participantContainer.appendChild(track.attach());
+    });
+
+    const participantName = document.createElement('p');
+    participantName.innerText = `${participant.identity} 🎬`;
+
+    participantContainer.appendChild(participantName);
+    this.container.appendChild(participantContainer);
+  };
+
+  initTwilioVideo = e => {
+    e.preventDefault();
+
+    // https://www.twilio.com/docs/api/video/javascript-v1-getting-started#2-get-an-api-key
+    Video.connect(this.props.WanderersStore.videoToken, {
+      name: this.props.WanderersStore.trip.uuid
+    }).then(
+      room => {
+        this.room = room;
+        this.props.UiStore.callInProgress = true;
+
+        console.log('Successfully joined a Room: ', room);
+        // people who were in the roon before you join
+        room.participants.forEach(participant => {
+          this.newParticipant(participant);
+        });
+        // when new participant joins
+        room.on('participantConnected', participant => {
+          this.newParticipant(participant);
+        });
+        // yourself
+        this.newParticipant(room.localParticipant);
+
+        room.on('participantDisconnected', participant => {
+          participant.tracks.forEach(track => {
+            track.detach().forEach(element => {
+              element.remove();
+            });
+          });
+
+          const participantContainer = document.getElementById(participant.sid);
+          participantContainer.remove();
+        });
+      },
+      error => {
+        console.error('Unable to connect to Room: ' + error.message);
+      }
+    );
+  };
+
+  // https://github.com/twilio/video-quickstart-js/blob/master/examples/codecpreferences/src/index.js
+  stopCall = e => {
+    e.preventDefault();
+
+    this.room.disconnect();
+    this.room = null;
+    this.props.UiStore.callInProgress = false;
+  };
 
   render() {
     const { WanderersStore, UiStore } = this.props;
@@ -37,18 +106,6 @@ export default class ShowTrip extends Component {
           {WanderersStore.buddies.map(buddy => (
             <ChatBuddyListItem key={buddy.id}>
               <p>{buddy.name} </p>
-              {false &&
-              enablePeer &&
-              buddy.user_id !== WanderersStore.user.id ? (
-                <img
-                  src="/videoChat.svg"
-                  className="videoIcon"
-                  alt="chat icon"
-                  onClick={e => this.startChat(e, buddy.user_id)}
-                />
-              ) : (
-                ''
-              )}
             </ChatBuddyListItem>
           ))}
         </ChatBuddyList>
@@ -69,12 +126,9 @@ export default class ShowTrip extends Component {
 
         <VideoContainer
           style={{
-            display:
-              this.props.UiStore.callInProgress ||
-              this.props.UiStore.showAnswerCall
-                ? 'block'
-                : 'none'
+            display: this.props.UiStore.callInProgress ? 'block' : 'none'
           }}
+          innerRef={container => (this.container = container)}
         >
           <VideoBtn onClick={e => this.stopCall(e)}>Hang up</VideoBtn>
         </VideoContainer>
@@ -93,6 +147,9 @@ export default class ShowTrip extends Component {
           </TriggerChat>
         )}
 
+        <TriggerVideo onClick={e => this.initTwilioVideo(e)} className="btn">
+          Video Chat
+        </TriggerVideo>
         <MapGL />
       </div>
     );
