@@ -24,6 +24,7 @@ class WanderersStore {
   @observable messages = [];
   @observable buddies = [];
   @observable stops = [];
+  @observable videoToken = null;
 
   constructor() {
     this.authApi = new AuthApi();
@@ -105,6 +106,7 @@ class WanderersStore {
     this.setupSubscription(id);
     this.loadMessages(id);
     this.loadBuddies(id);
+    this.loadVideoToken(id);
     await this.loadStops(id);
 
     if (this.stops.length > 0) {
@@ -226,6 +228,15 @@ class WanderersStore {
     await this.placesApi.updateTrip(this.user.token, trip.id, {
       rating: rating
     });
+  };
+
+  @action
+  loadVideoToken = async tripId => {
+    const response = await this.placesApi.loadVideoToken(
+      this.user.token,
+      tripId
+    );
+    this.videoToken = response.data.token;
   };
 }
 

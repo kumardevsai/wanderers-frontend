@@ -107,4 +107,12 @@ export default class PlacesApi {
   updateTrip = (user_token, tripId, fields) => {
     return this.api.put(`/trips/${tripId}`, fields, this.headers(user_token));
   };
+
+  loadVideoToken = (user_token, tripId) => {
+    return this.api.get(
+      `/trips/${tripId}/video_token`,
+      {},
+      this.headers(user_token)
+    );
+  };
 }
