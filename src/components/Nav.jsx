@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 // import { Link } from 'react-router-dom';
-import { NavWrapper, Navigation, List, NavLink } from '../elements/nav';
+import {
+  NavWrapper,
+  Navigation,
+  List,
+  ListItem,
+  NavLink
+} from '../elements/nav';
 
 @inject('WanderersStore')
 @observer
@@ -15,33 +21,33 @@ export default class Nav extends Component {
         <Navigation>
           {user ? (
             <List>
-              <li>
+              <ListItem>
                 <NavLink to="/">HOME</NavLink>
-              </li>
-              <li>
+              </ListItem>
+              <ListItem>
                 <NavLink to="/trips/new">PLAN TRIP</NavLink>
-              </li>
-              <li>
+              </ListItem>
+              <ListItem>
                 <NavLink to="/trips">MY TRIPS</NavLink>
-              </li>
-              <li>
+              </ListItem>
+              <ListItem>
                 <NavLink to="/places">MAP</NavLink>
-              </li>
-              <li>
+              </ListItem>
+              <ListItem>
                 <NavLink to="/logout">LOG OUT</NavLink>
-              </li>
+              </ListItem>
             </List>
           ) : (
             <List>
-              <li>
+              <ListItem>
                 <NavLink to="/">HOME</NavLink>
-              </li>
-              <li>
+              </ListItem>
+              <ListItem>
                 <NavLink to="/signup">SIGN UP</NavLink>
-              </li>
-              <li>
+              </ListItem>
+              <ListItem>
                 <NavLink to="/login">LOGIN</NavLink>
-              </li>
+              </ListItem>
             </List>
           )}
         </Navigation>

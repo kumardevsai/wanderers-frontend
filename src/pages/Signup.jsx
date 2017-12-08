@@ -8,9 +8,10 @@ import {
   Label,
   InputWrapper,
   Input,
-  ActionsContainer,
-  Action
+  ActionsContainer
 } from '../elements/form';
+
+import { Btn, BtnLink } from '../elements/button';
 
 @inject('WanderersStore', 'UiStore')
 @observer
@@ -108,8 +109,8 @@ export default class Signup extends Component {
           </InputWrapper>
 
           <ActionsContainer>
-            <Action type="submit">SAVE</Action>
-            <Action>CANCEL</Action>
+            <Btn type="submit">SAVE</Btn>
+            <BtnLink to="/">CANCEL</BtnLink>
           </ActionsContainer>
         </Form>
       </FormContainer>

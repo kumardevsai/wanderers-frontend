@@ -8,10 +8,9 @@ import {
   InputWrapper,
   Label,
   Input,
-  ActionsContainer,
-  Action,
-  LinkButton
+  ActionsContainer
 } from '../elements/form';
+import { Btn } from '../elements/button';
 
 @inject('WanderersStore')
 @observer
@@ -48,8 +47,8 @@ export default class NewTrip extends Component {
             />
 
             <ActionsContainer>
-              <Action type="submit">SUBMIT</Action>
-              <LinkButton to="/places">CANCEL</LinkButton>
+              <Btn type="submit">SUBMIT</Btn>
+              <Btn to="/places">CANCEL</Btn>
             </ActionsContainer>
           </InputWrapper>
         </Form>

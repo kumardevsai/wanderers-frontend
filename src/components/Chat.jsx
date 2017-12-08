@@ -8,7 +8,7 @@ import {
   MessageUserName,
   ChatTextarea
 } from '../elements/chat';
-import { FilledButton } from '../elements/form';
+import { Btn } from '../elements/button';
 
 @inject('WanderersStore')
 @observer
@@ -43,7 +43,7 @@ export default class Chat extends React.Component {
               innerRef={area => (this.content = area)}
               placeholder="YOUR MESSAGE"
             />
-            <FilledButton type="submit">SEND</FilledButton>
+            <Btn type="submit">SEND</Btn>
           </form>
         </section>
       </ChatArea>

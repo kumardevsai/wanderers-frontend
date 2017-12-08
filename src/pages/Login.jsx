@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import { Link } from 'react-router-dom';
 
 import {
   FormContainer,
@@ -9,9 +8,9 @@ import {
   Label,
   InputWrapper,
   Input,
-  ActionsContainer,
-  Action
+  ActionsContainer
 } from '../elements/form';
+import { Btn, BtnLink } from '../elements/button';
 
 @inject('WanderersStore', 'UiStore')
 @observer
@@ -77,10 +76,8 @@ export default class Login extends Component {
           </InputWrapper>
 
           <ActionsContainer>
-            <Action type="submit">LOGIN</Action>
-            <Link to="/" className="btn">
-              CANCEL
-            </Link>
+            <Btn type="submit">LOGIN</Btn>
+            <BtnLink to="/">CANCEL</BtnLink>
           </ActionsContainer>
         </Form>
       </FormContainer>

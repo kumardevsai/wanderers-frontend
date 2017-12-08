@@ -14,12 +14,13 @@ export const colors = {
 };
 
 export const fontSizes = {
-  small: '1em',
-  medium: '1.3em',
-  large: '2.5em'
+  small: '1rem',
+  medium: '1.3rem',
+  large: '2.5rem'
 };
 
 export const margin = {
+  ultramini: '5px',
   mini: '10px',
   small: '30px',
   medium: '50px',
@@ -35,8 +36,8 @@ export const padding = {
 };
 
 export const fonts = {
-  body: 'Roboto Condensed, sans-serif',
-  h1Heading: 'Fjalla One, sans-serif',
-  nav: 'Nixie One, cursive',
-  headings: 'Roboto Condensed, sans-serif'
+  h1Heading: 'Lato, sans-serif',
+  nav: 'Heebo, sans-serif',
+  headings: 'Heebo, sans-serif',
+  body: 'Heebo, sans-serif'
 };

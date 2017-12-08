@@ -238,6 +238,8 @@ class WanderersStore {
     );
     this.videoToken = response.data.token;
   };
+
+  @action addImage = async (tripId, image, caption) => {};
 }
 
 const singleton = new WanderersStore();

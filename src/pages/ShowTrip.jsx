@@ -8,7 +8,7 @@ import Chat from '../components/Chat';
 
 import { ChatBuddyList, ChatBuddyListItem } from '../elements/chat';
 import { VideoContainer, VideoBtn } from '../elements/video';
-import { TriggerChat, TriggerVideo, TriggerBuddy } from '../elements/triggers';
+import { Btn } from '../elements/button';
 
 import Video from 'twilio-video';
 
@@ -113,7 +113,7 @@ export default class ShowTrip extends Component {
         {UiStore.showBuddyForm ? (
           <BuddyForm />
         ) : (
-          <TriggerBuddy
+          <Btn
             className="btn"
             onClick={e => {
               e.preventDefault();
@@ -121,7 +121,7 @@ export default class ShowTrip extends Component {
             }}
           >
             INVITE BUDDY
-          </TriggerBuddy>
+          </Btn>
         )}
 
         <VideoContainer
@@ -136,7 +136,7 @@ export default class ShowTrip extends Component {
         {UiStore.showChat ? (
           <Chat />
         ) : (
-          <TriggerChat
+          <Btn
             className="btn"
             onClick={e => {
               e.preventDefault();
@@ -144,12 +144,12 @@ export default class ShowTrip extends Component {
             }}
           >
             CHAT
-          </TriggerChat>
+          </Btn>
         )}
 
-        <TriggerVideo onClick={e => this.initTwilioVideo(e)} className="btn">
+        <Btn onClick={e => this.initTwilioVideo(e)} className="btn">
           Video Chat
-        </TriggerVideo>
+        </Btn>
         <MapGL />
       </div>
     );

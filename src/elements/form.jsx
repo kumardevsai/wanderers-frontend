@@ -47,11 +47,12 @@ const Heading2 = styled.h2`
 const Label = styled.label`
   font-size: ${fontSizes.small};
   font-family: ${fonts.body};
-  text-decoration: underline;
   color: ${colors.gray};
   text-transform: uppercase;
-  margin-bottom: ${margin.mini};
+  margin-top: ${margin.small};
+  margin-bottom: 10px;
   display: block;
+  text-align: left;
 `;
 
 const InputWrapper = styled.div`
@@ -88,43 +89,6 @@ const ActionsContainer = styled.div`
   align-items: space-between;
 `;
 
-const Action = styled.button`
-  font-family: ${fonts.body};
-  border-radius: 0px;
-  border: 1px solid ${colors.white};
-  padding: ${padding.mini};
-  margin: ${margin.mini};
-  width: 10rem;
-  background-color: transparent;
-  color: ${colors.gray};
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  transition: background-color 1s ease;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${colors.black};
-    color: ${colors.white};
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-`;
-
-const LinkButton = styled(Action)``;
-
-const FilledButton = styled(Action)`
-  margin-right: 0px;
-  background-color: ${colors.black};
-  color: ${colors.white};
-  align-self: flex-end;
-  transition: background-color 1s ease;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${colors.white};
-    color: ${colors.black};
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-`;
-
 export {
   FormContainer,
   BuddyFormContainer,
@@ -133,8 +97,5 @@ export {
   Label,
   InputWrapper,
   Input,
-  ActionsContainer,
-  Action,
-  LinkButton,
-  FilledButton
+  ActionsContainer
 };

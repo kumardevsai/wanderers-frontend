@@ -11,7 +11,7 @@ const HomeContainer = styled.div`
 
   @media (max-width: 1296px) {
     height: 97vh;
-    ${'' /* margin-top: -7vw; */} margin-left: 0px;
+    margin-left: 0px;
     z-index: -1;
   }
 `;
@@ -41,7 +41,7 @@ const Heading1 = styled.h1`
   margin: 0 auto;
 
   @media (max-width: 1296px) {
-    font-size: 5rem;
+    font-size: 4rem;
   }
 `;
 

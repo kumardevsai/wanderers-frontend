@@ -7,9 +7,9 @@ import {
   Label,
   Input,
   ActionsContainer,
-  Action,
   BuddyFormContainer
 } from '../elements/form';
+import { Btn } from '../elements/button';
 
 @inject('WanderersStore')
 @observer
@@ -40,8 +40,8 @@ export default class BuddyForm extends Component {
           </InputWrapper>
 
           <ActionsContainer>
-            <Action type="submit">SEND</Action>
-            <Action>CANCEL</Action>
+            <Btn type="submit">SEND</Btn>
+            <Btn>CANCEL</Btn>
           </ActionsContainer>
         </Form>
       </BuddyFormContainer>
