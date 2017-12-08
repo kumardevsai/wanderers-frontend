@@ -55,6 +55,7 @@ export default class TripsListing extends Component {
 
     this.props.WanderersStore.trip = trip;
 
+    this.props.WanderersStore.loadTripImages(trip.id);
     await this.props.WanderersStore.loadStops(trip.id);
     this.preloadImages();
 
@@ -73,14 +74,29 @@ export default class TripsListing extends Component {
 
     if (UiStore.showSelected === 'stops') {
       return (
-        <ul>
-          {WanderersStore.stops.map(stop => (
-            <li className="stopName" key={stop.id}>
-              {stop.place.name},{' '}
-              {stop.place.city.country.slice(0, 3).toUpperCase()}
-            </li>
-          ))}
-        </ul>
+        <div>
+          <ul>
+            {WanderersStore.stops.map(stop => (
+              <li className="stopName" key={stop.id}>
+                {stop.place.name},{' '}
+                {stop.place.city.country.slice(0, 3).toUpperCase()}
+              </li>
+            ))}
+          </ul>
+          {trip.completed ? (
+            <section className="tripImages">
+              {WanderersStore.tripImages.map(image => (
+                <img
+                  key={image.id}
+                  src={image.card_image}
+                  alt={image.caption || 'trip image'}
+                />
+              ))}
+            </section>
+          ) : (
+            ''
+          )}
+        </div>
       );
     } else if (UiStore.showSelected === 'edit') {
       return (

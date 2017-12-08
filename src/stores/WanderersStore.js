@@ -25,6 +25,7 @@ class WanderersStore {
   @observable buddies = [];
   @observable stops = [];
   @observable videoToken = null;
+  @observable tripImages = [];
 
   constructor() {
     this.authApi = new AuthApi();
@@ -106,6 +107,7 @@ class WanderersStore {
     this.setupSubscription(id);
     this.loadMessages(id);
     this.loadBuddies(id);
+    this.loadTripImages(id);
     await this.loadVideoToken(id);
     await this.loadStops(id);
 
@@ -239,7 +241,25 @@ class WanderersStore {
     this.videoToken = response.data.token;
   };
 
-  @action addImage = async (tripId, image, caption) => {};
+  @action
+  addTripImage = async (tripId, image, caption) => {
+    const response = await this.placesApi.addTripImage(
+      this.user.token,
+      tripId,
+      image,
+      caption
+    );
+    this.tripImages.push(response.data);
+  };
+
+  @action
+  loadTripImages = async tripId => {
+    const response = await this.placesApi.loadTripImages(
+      this.user.token,
+      tripId
+    );
+    this.tripImages = response.data;
+  };
 }
 
 const singleton = new WanderersStore();

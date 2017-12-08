@@ -32,7 +32,6 @@ export default class PlacesApi {
   };
 
   createTrip = (user_token, name) => {
-    console.log(name);
     return this.api.post(
       '/trips',
       {
@@ -111,6 +110,26 @@ export default class PlacesApi {
   loadVideoToken = (user_token, tripId) => {
     return this.api.get(
       `/trips/${tripId}/video_token`,
+      {},
+      this.headers(user_token)
+    );
+  };
+
+  addTripImage = (user_token, tripId, image, caption) => {
+    const formData = new FormData();
+    formData.append('trip_image[caption]', caption);
+    formData.append('trip_image[image]', image);
+
+    return this.api.post(
+      `/trips/${tripId}/trip_images`,
+      formData,
+      this.headers(user_token)
+    );
+  };
+
+  loadTripImages = (user_token, tripId) => {
+    return this.api.get(
+      `/trips/${tripId}/trip_images`,
       {},
       this.headers(user_token)
     );

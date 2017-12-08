@@ -26,11 +26,13 @@ export default class TripImageForm extends Component {
 
   uploadImage = e => {
     e.preventDefault();
-    this.props.WanderersStore.addImage(
+    this.props.WanderersStore.addTripImage(
       this.props.trip.id,
       this.imageInput.files[0],
       this.captionInput.value
     );
+
+    e.target.reset();
   };
 
   render() {
@@ -66,7 +68,6 @@ export default class TripImageForm extends Component {
 
         <ActionsContainer>
           <Btn type="submit">UPLOAD</Btn>
-          <Btn>CANCEL</Btn>
         </ActionsContainer>
       </Form>
     );
