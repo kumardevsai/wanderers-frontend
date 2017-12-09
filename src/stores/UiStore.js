@@ -13,6 +13,9 @@ class UiStore {
   @observable visualImagePositionY = null;
   @observable visualImageStop = null;
   @observable showSelected = 'stops';
+
+  @observable openTripImage = false;
+  @observable imageOpened = null;
 }
 
 const singleton = new UiStore();

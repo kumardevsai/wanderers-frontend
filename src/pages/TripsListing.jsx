@@ -19,6 +19,7 @@ import { Figure, CardImg, Figcaption } from '../elements/figure';
 import Scene from '../Scene';
 import TripCompleted from '../components/TripCompleted';
 import TripImageForm from '../components/TripImageForm';
+import TripImageOverlay from '../components/TripImageOverlay';
 import PageTransition from '../components/PageTransition';
 
 @inject('WanderersStore', 'UiStore')
@@ -97,6 +98,11 @@ export default class TripsListing extends Component {
                   key={image.id}
                   src={image.card_image}
                   alt={image.caption || 'trip image'}
+                  onClick={e => {
+                    e.preventDefault();
+                    UiStore.openTripImage = true;
+                    UiStore.imageOpened = image;
+                  }}
                 />
               ))}
             </ImageSection>
@@ -153,6 +159,8 @@ export default class TripsListing extends Component {
     return (
       <PageTransition>
         <ProfilePage>
+          <TripImageOverlay />
+
           <TripVisualization innerRef={section => (this.section = section)} />
 
           {UiStore.visualImageVisible && stop ? (

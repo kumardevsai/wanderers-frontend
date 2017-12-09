@@ -3,14 +3,6 @@ import { observer, inject } from 'mobx-react';
 
 import PropTypes from 'prop-types';
 
-import {
-  NavWrapper,
-  Navigation,
-  List,
-  ListItem,
-  NavLink
-} from '../elements/nav';
-
 import { Menu, MainButton, ChildButton } from 'react-mfb';
 
 @inject('UiStore')
