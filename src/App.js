@@ -12,6 +12,8 @@ import Places from './pages/Places';
 import NewTrip from './pages/NewTrip';
 import ShowTrip from './pages/ShowTrip';
 import TripsListing from './pages/TripsListing';
+import JoinTrip from './pages/JoinTrip';
+import Logout from './pages/Logout';
 
 import { AppContainer } from './elements/app';
 
@@ -31,55 +33,10 @@ class App extends Component {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/places" component={Places} />
                 <Route exact path="/trips/new" component={NewTrip} />
-                {/* This type of routing is used when you need to load data before rendering the component for this path -type before action in rails - */}
-                <Route
-                  exact
-                  path="/trips/:id"
-                  render={props => {
-                    const tripId = props.match.params.id;
-                    WanderersStore.loadTrip(tripId);
-                    return <ShowTrip />;
-                  }}
-                />
-
-                <Route
-                  exact
-                  path="/trips"
-                  render={() => {
-                    WanderersStore.loadTrips();
-                    return <TripsListing />;
-                  }}
-                />
-
-                <Route
-                  exact
-                  path="/trips/:id/join"
-                  render={props => {
-                    if (WanderersStore.user) {
-                      // post to buddies create to crete buddy record for user for trip
-                      const tripId = props.match.params.id;
-                      WanderersStore.joinTrip(tripId, props.history);
-                      return 'Joining trip 🛵';
-                    } else {
-                      // save in session storage where user wanted to go
-                      sessionStorage.setItem(
-                        'url-after-login',
-                        props.location.pathname
-                      );
-                      // redirect to signup
-                      return <Redirect to="/signup" />;
-                    }
-                  }}
-                />
-
-                <Route
-                  exact
-                  path="/logout"
-                  render={() => {
-                    WanderersStore.logout();
-                    return <Redirect to="/" />;
-                  }}
-                />
+                <Route exact path="/trips/:id" component={ShowTrip} />
+                <Route exact path="/trips" component={TripsListing} />
+                <Route exact path="/trips/:id/join" component={JoinTrip} />
+                <Route exact path="/logout" component={Logout} />
               </Switch>
             </div>
           </BrowserRouter>

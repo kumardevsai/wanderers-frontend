@@ -17,6 +17,11 @@ import PageTransition from '../components/PageTransition';
 @inject('WanderersStore', 'UiStore')
 @observer
 export default class ShowTrip extends Component {
+  componentWillMount() {
+    const tripId = this.props.match.params.id;
+    this.props.WanderersStore.loadTrip(tripId);
+  }
+
   componentDidMount() {
     document.addEventListener('keydown', e => {
       if (e.code === 'Escape') {

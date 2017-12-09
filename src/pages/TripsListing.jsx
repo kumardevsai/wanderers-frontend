@@ -30,6 +30,10 @@ export default class TripsListing extends Component {
     this.scene = null;
   }
 
+  componentWillMount() {
+    this.props.WanderersStore.loadTrips();
+  }
+
   componentDidMount() {
     this.hideOnEscape();
 
