@@ -12,11 +12,14 @@ import {
   TripIcon
 } from '../elements/profile';
 
+import { ImageSection, Image } from '../elements/tripImages';
+import { Stop } from '../elements/stops';
 import { Figure, CardImg, Figcaption } from '../elements/figure';
 
 import Scene from '../Scene';
 import TripCompleted from '../components/TripCompleted';
 import TripImageForm from '../components/TripImageForm';
+import PageTransition from '../components/PageTransition';
 
 @inject('WanderersStore', 'UiStore')
 @observer
@@ -77,22 +80,22 @@ export default class TripsListing extends Component {
         <div>
           <ul>
             {WanderersStore.stops.map(stop => (
-              <li className="stopName" key={stop.id}>
+              <Stop key={stop.id}>
                 {stop.place.name},{' '}
                 {stop.place.city.country.slice(0, 3).toUpperCase()}
-              </li>
+              </Stop>
             ))}
           </ul>
           {trip.completed ? (
-            <section className="tripImages">
+            <ImageSection>
               {WanderersStore.tripImages.map(image => (
-                <img
+                <Image
                   key={image.id}
                   src={image.card_image}
                   alt={image.caption || 'trip image'}
                 />
               ))}
-            </section>
+            </ImageSection>
           ) : (
             ''
           )}
@@ -144,68 +147,70 @@ export default class TripsListing extends Component {
     const stop = UiStore.visualImageStop;
 
     return (
-      <ProfilePage>
-        <TripVisualization innerRef={section => (this.section = section)} />
+      <PageTransition>
+        <ProfilePage>
+          <TripVisualization innerRef={section => (this.section = section)} />
 
-        {UiStore.visualImageVisible && stop ? (
-          <div
-            style={{
-              position: 'absolute',
-              top: UiStore.visualImagePositionY,
-              left: UiStore.visualImagePositionX
-            }}
-          >
-            <Figure>
-              <CardImg
-                src={
-                  stop.place.place_images.length > 0
-                    ? stop.place.place_images[0].card_image
-                    : '/noimg.jpg'
-                }
-                alt={stop.place.name}
-              />
-              <Figcaption>{stop.place.name.toUpperCase()}</Figcaption>
-            </Figure>
-          </div>
-        ) : (
-          ''
-        )}
+          {UiStore.visualImageVisible && stop ? (
+            <div
+              style={{
+                position: 'absolute',
+                top: UiStore.visualImagePositionY,
+                left: UiStore.visualImagePositionX
+              }}
+            >
+              <Figure>
+                <CardImg
+                  src={
+                    stop.place.place_images.length > 0
+                      ? stop.place.place_images[0].card_image
+                      : '/noimg.jpg'
+                  }
+                  alt={stop.place.name}
+                />
+                <Figcaption>{stop.place.name.toUpperCase()}</Figcaption>
+              </Figure>
+            </div>
+          ) : (
+            ''
+          )}
 
-        <UserTrips>
-          <TripsList>
-            {trips.map(trip => {
-              return (
-                <TripsListItem key={trip.id}>
-                  <TripName>{trip.name}</TripName>
-                  <TripIcon
-                    src="/view.svg"
-                    alt="view icon"
-                    onClick={e => {
-                      e.preventDefault();
-                      this.showVisualTrip(trip);
-                      UiStore.showSelected = 'stops';
-                    }}
-                  />
-                  <Link to={`/trips/${trip.id}`}>
-                    <TripIcon src="/world.svg" alt="map icon" />
-                  </Link>
-                  <TripIcon
-                    src="/edit.svg"
-                    alt="edit icon"
-                    onClick={e => {
-                      e.preventDefault();
-                      this.showVisualTrip(trip);
-                      UiStore.showSelected = 'edit';
-                    }}
-                  />
+          <UserTrips>
+            <TripsList>
+              {trips.map(trip => {
+                return (
+                  <TripsListItem key={trip.id}>
+                    <TripName>{trip.name}</TripName>
+                    <TripIcon
+                      src="/view.svg"
+                      alt="view icon"
+                      onClick={e => {
+                        e.preventDefault();
+                        this.showVisualTrip(trip);
+                        UiStore.showSelected = 'stops';
+                      }}
+                    />
+                    <Link to={`/trips/${trip.id}`}>
+                      <TripIcon src="/world.svg" alt="map icon" />
+                    </Link>
+                    <TripIcon
+                      src="/edit.svg"
+                      alt="edit icon"
+                      onClick={e => {
+                        e.preventDefault();
+                        this.showVisualTrip(trip);
+                        UiStore.showSelected = 'edit';
+                      }}
+                    />
 
-                  {this.showSelected(trip)}
-                </TripsListItem>
-              );
-            })}
-          </TripsList>
-        </UserTrips>
-      </ProfilePage>
+                    {this.showSelected(trip)}
+                  </TripsListItem>
+                );
+              })}
+            </TripsList>
+          </UserTrips>
+        </ProfilePage>
+      </PageTransition>
     );
   }
 }

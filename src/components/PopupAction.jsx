@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { observer, inject } from 'mobx-react';
 
+import { BlockBtn } from '../elements/button';
+
 @inject('WanderersStore')
 @observer
 export default class PopupAction extends Component {
@@ -19,27 +21,25 @@ export default class PopupAction extends Component {
       return '';
     } else if (stop) {
       return (
-        <button
-          className="btn block-btn"
+        <BlockBtn
           onClick={e => {
             e.preventDefault();
             WanderersStore.removeStopFromTrip(stop.id);
           }}
         >
           REMOVE STOP
-        </button>
+        </BlockBtn>
       );
     } else {
       return (
-        <button
-          className="btn block-btn"
+        <BlockBtn
           onClick={e => {
             e.preventDefault();
             WanderersStore.addStopToTrip(place.id);
           }}
         >
           ADD STOP
-        </button>
+        </BlockBtn>
       );
     }
   }

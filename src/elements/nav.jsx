@@ -4,7 +4,7 @@ import { colors, fonts, padding, margin } from './variables';
 import { Link } from 'react-router-dom';
 
 const NavWrapper = styled.div`
-  z-index: 500;
+  z-index: 5;
   position: fixed;
   left: 0;
   top: 0;
@@ -12,11 +12,11 @@ const NavWrapper = styled.div`
   background-color: ${colors.lightPurple};
   width: 7vw;
 
-  @media (max-width: 1296px) {
+  @media (max-width: 1196px) {
     width: 100%;
-    height: 10vh;
+    height: 75px;
     position: absolute;
-    top: 90vh;
+    top: calc(100vh - 75px);
   }
 `;
 
@@ -31,14 +31,14 @@ const List = styled.ul`
   height: 33.3%;
   flex-grow: 1;
 
-  @media (max-width: 1296px) {
+  @media (max-width: 1196px) {
     height: 100%;
     flex-direction: row;
   }
 `;
 
 const ListItem = styled.li`
-  @media (max-width: 1296px) {
+  @media (max-width: 1196px) {
     display: inline-block;
     padding-top: 20px;
     width: 20%;
@@ -77,7 +77,7 @@ const NavLink = styled(Link)`
     width: 110%;
   }
 
-  @media (max-width: 1296px) {
+  @media (max-width: 1196px) {
     margin-top: 0px;
   }
 `;

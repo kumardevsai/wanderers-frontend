@@ -5,8 +5,8 @@ const ChatArea = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   position: absolute;
-  bottom: 20px;
-  right: 0;
+  bottom: 0px;
+  left: 7vw;
   padding-bottom: ${padding.small};
   z-index: 5;
   display: flex;
@@ -14,11 +14,12 @@ const ChatArea = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 0px;
+  background-color: ${colors.lightGrey};
+  padding: 20px;
 `;
 
 const MessagesContainer = styled.div`
   background-color: ${colors.white};
-  border: 1px solid ${colors.black};
   margin-bottom: ${margin.mini};
   padding: ${margin.mini};
   font-family: ${fonts.body};
@@ -28,9 +29,9 @@ const MessagesContainer = styled.div`
 `;
 
 const MessageUserName = styled.div`
-  background-color: ${colors.pink};
-  color: ${colors.lightPurple};
-  width: 30%;
+  background-color: ${colors.blue};
+  color: ${colors.offwhite};
+  width: 100%;
   padding: ${padding.ultramini};
   margin-bottom: ${padding.ultramini};
 `;
@@ -43,6 +44,7 @@ const ChatTextarea = styled.textarea`
   -webkit-box-shadow: 0 0 0 30px white inset;
   font-size: ${fontSizes.small};
   font-family: ${fonts.body};
+  border: none;
 `;
 
 const ChatBuddyList = styled.ul`
@@ -53,6 +55,10 @@ const ChatBuddyList = styled.ul`
   align-self: flex-end;
   display: flex;
   z-index: 6;
+
+  @media (max-width: 1196px) {
+    display: none;
+  }
 `;
 
 const ChatBuddyListItem = styled.li`

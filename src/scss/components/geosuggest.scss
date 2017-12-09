@@ -15,7 +15,7 @@
   font-size: 1rem;
   position: relative;
   width: 20vw;
-  margin: 3rem auto;
+  margin: 4rem auto;
   margin-left: 8vw;
   text-align: left;
 
@@ -89,6 +89,10 @@
   width: 20vw;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background-color: #fff;
+
+  @media (max-width: 1296px) {
+    width: 40vw;
+  }
 }
 
 .geosuggest__input {
@@ -97,10 +101,14 @@
   max-width: 100%;
   padding: 15px;
   font-size: 14px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Heebo', sans-serif;
   color: #9068be;
   font-weight: bolder;
   text-transform: uppercase;
+
+  @media (max-width: 1296px) {
+    width: 40vw;
+  }
 }
 
 .geosuggest__input:focus,

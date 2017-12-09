@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
+import PageTransition from '../components/PageTransition';
+
 import {
   FormContainer,
   Form,
@@ -40,80 +42,82 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <FormContainer>
-        <Form onSubmit={e => this.submitForm(e)}>
-          <Heading2>Sign Up</Heading2>
+      <PageTransition>
+        <FormContainer>
+          <Form onSubmit={e => this.submitForm(e)}>
+            <Heading2>Sign Up</Heading2>
 
-          {this.props.UiStore.signupFormErrors
-            ? this.props.UiStore.signupFormErrors.map(error => (
-                <p key={error} className="error">
-                  {error}
-                </p>
-              ))
-            : ''}
+            {this.props.UiStore.signupFormErrors
+              ? this.props.UiStore.signupFormErrors.map(error => (
+                  <p key={error} className="error">
+                    {error}
+                  </p>
+                ))
+              : ''}
 
-          <InputWrapper>
-            <Label htmlFor="name" className="inputLabel">
-              Name
-            </Label>
-            <Input
-              innerRef={input => (this.nameInput = input)}
-              type="text"
-              className="inputField"
-              name="name"
-              id="name"
-              required
-            />
-          </InputWrapper>
+            <InputWrapper>
+              <Label htmlFor="name" className="inputLabel">
+                Name
+              </Label>
+              <Input
+                innerRef={input => (this.nameInput = input)}
+                type="text"
+                className="inputField"
+                name="name"
+                id="name"
+                required
+              />
+            </InputWrapper>
 
-          <InputWrapper>
-            <Label htmlFor="email" className="inputLabel">
-              Email
-            </Label>
-            <Input
-              innerRef={input => (this.emailInput = input)}
-              type="email"
-              className="inputField"
-              name="email"
-              id="email"
-              required
-            />
-          </InputWrapper>
+            <InputWrapper>
+              <Label htmlFor="email" className="inputLabel">
+                Email
+              </Label>
+              <Input
+                innerRef={input => (this.emailInput = input)}
+                type="email"
+                className="inputField"
+                name="email"
+                id="email"
+                required
+              />
+            </InputWrapper>
 
-          <InputWrapper>
-            <Label htmlFor="password" className="inputLabel">
-              Password
-            </Label>
-            <Input
-              innerRef={input => (this.passwordInput = input)}
-              type="password"
-              className="inputField"
-              name="password"
-              id="password"
-              required
-            />
-          </InputWrapper>
+            <InputWrapper>
+              <Label htmlFor="password" className="inputLabel">
+                Password
+              </Label>
+              <Input
+                innerRef={input => (this.passwordInput = input)}
+                type="password"
+                className="inputField"
+                name="password"
+                id="password"
+                required
+              />
+            </InputWrapper>
 
-          <InputWrapper>
-            <Label htmlFor="image" className="inputLabel">
-              Image
-            </Label>
-            <Input
-              innerRef={input => (this.imageInput = input)}
-              type="file"
-              className="inputField"
-              name="image"
-              id="image"
-              required
-            />
-          </InputWrapper>
+            <InputWrapper>
+              <Label htmlFor="image" className="inputLabel">
+                Image
+              </Label>
+              <Input
+                innerRef={input => (this.imageInput = input)}
+                type="file"
+                className="inputField"
+                name="image"
+                id="image"
+                required
+              />
+            </InputWrapper>
 
-          <ActionsContainer>
-            <Btn type="submit">SAVE</Btn>
-            <BtnLink to="/">CANCEL</BtnLink>
-          </ActionsContainer>
-        </Form>
-      </FormContainer>
+            <ActionsContainer>
+              <Btn type="submit">SAVE</Btn>
+              <BtnLink to="/">CANCEL</BtnLink>
+            </ActionsContainer>
+          </Form>
+        </FormContainer>
+      </PageTransition>
     );
   }
 }

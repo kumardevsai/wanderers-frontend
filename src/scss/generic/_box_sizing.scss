@@ -6,3 +6,9 @@ body {
   background-color: #c2dfea;
   position: relative;
 }
+
+.mapboxgl-popup-content {
+  max-width: 250px;
+  margin: 0 auto;
+  padding: 0;
+}

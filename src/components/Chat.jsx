@@ -24,14 +24,16 @@ export default class Chat extends React.Component {
     const { WanderersStore } = this.props;
     return (
       <ChatArea>
-        <MessagesContainer>
-          {WanderersStore.messages.map(message => (
-            <div className="msg" key={message.id}>
-              <MessageUserName>{message.name}</MessageUserName>
-              <div className="msg_content">{message.text}</div>
-            </div>
-          ))}
-        </MessagesContainer>
+        {WanderersStore.messages.length > 0 && (
+          <MessagesContainer>
+            {WanderersStore.messages.map(message => (
+              <div className="msg" key={message.id}>
+                <MessageUserName>{message.name}</MessageUserName>
+                <div className="msg_content">{message.text}</div>
+              </div>
+            ))}
+          </MessagesContainer>
+        )}
 
         <section className="messageForm">
           <form

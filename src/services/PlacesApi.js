@@ -19,13 +19,14 @@ export default class PlacesApi {
     }
   });
 
-  search = (user_token, lat, lon) => {
+  search = (user_token, lat, lon, type) => {
     // get info from #places from places-ms
     return this.api.get(
       '/places',
       {
         lat,
-        lon
+        lon,
+        type
       },
       this.headers(user_token)
     );

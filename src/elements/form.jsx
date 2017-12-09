@@ -26,7 +26,8 @@ const BuddyFormContainer = styled.div`
   padding: 20px;
   width: 30%;
   position: absolute;
-  top: 75%;
+  bottom: 0px;
+  left: 7vw;
   z-index: 15;
   background-color: ${colors.lightGrey};
   color: ${colors.white};
@@ -83,10 +84,7 @@ const Input = styled.input`
 `;
 
 const ActionsContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: space-between;
+  text-align: center;
 `;
 
 export {

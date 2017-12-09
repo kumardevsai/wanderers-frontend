@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
+import Dimensions from 'react-dimensions';
+
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import CityPin from '../components/CityPin';
 import PopupContent from '../components/PopupContent';
-
 import { MapContainer } from '../elements/map';
 
 @inject('WanderersStore')
 @observer
-export default class MapGL extends Component {
+class MapGL extends Component {
+  componentDidMount() {
+    window.dispatchEvent(new Event('resize'));
+  }
+
   renderPlaces = () => {
     const { WanderersStore } = this.props;
     return WanderersStore.places.map(place => {
@@ -76,6 +81,8 @@ export default class MapGL extends Component {
       <MapContainer>
         <ReactMapGL
           {...viewport}
+          width={this.props.containerWidth}
+          height={this.props.containerHeight}
           mapboxApiAccessToken="pk.eyJ1IjoibWFyaWFuc2VybmEiLCJhIjoiY2o0dm8wcGpqMHZ2YzJxcjV0ZDFvbTM5dSJ9.W5BkzLIaUIZcVuiSFbVTsw"
           onViewportChange={viewport => {
             // From Mapbox: Allows map to display updated viewport (drag & zoom)
@@ -91,3 +98,5 @@ export default class MapGL extends Component {
     );
   }
 }
+
+export default Dimensions()(MapGL);

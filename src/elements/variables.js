@@ -3,6 +3,7 @@ export const colors = {
   gray: '#8C95AA',
   darkBlue: '#03243A',
   babyBlue: '#c2dfea',
+  blue: '#0b90aa',
   white: '#FFFFFF',
   black: '#212121',
   lillac: '#9068BE',
@@ -14,6 +15,7 @@ export const colors = {
 };
 
 export const fontSizes = {
+  mini: '0.8rem',
   small: '1rem',
   medium: '1.3rem',
   large: '2.5rem'

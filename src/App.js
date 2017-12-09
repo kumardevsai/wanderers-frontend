@@ -13,13 +13,15 @@ import NewTrip from './pages/NewTrip';
 import ShowTrip from './pages/ShowTrip';
 import TripsListing from './pages/TripsListing';
 
+import { AppContainer } from './elements/app';
+
 import './scss/main.scss';
 
 class App extends Component {
   render() {
     return (
       <Provider WanderersStore={WanderersStore} UiStore={UiStore}>
-        <div className="App">
+        <AppContainer>
           <BrowserRouter>
             <div>
               <Nav />
@@ -81,7 +83,7 @@ class App extends Component {
               </Switch>
             </div>
           </BrowserRouter>
-        </div>
+        </AppContainer>
       </Provider>
     );
   }

@@ -77,12 +77,17 @@ class WanderersStore {
   };
 
   @action
-  searchPlaces = async (lat, lon) => {
+  searchPlaces = async (lat, lon, type = '') => {
     this.viewport.latitude = lat;
     this.viewport.longitude = lon;
     this.viewport.zoom = 16;
 
-    const response = await this.placesApi.search(this.user.token, lat, lon);
+    const response = await this.placesApi.search(
+      this.user.token,
+      lat,
+      lon,
+      type
+    );
 
     this.places = response.data;
   };

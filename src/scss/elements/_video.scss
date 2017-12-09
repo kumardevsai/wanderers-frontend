@@ -1,0 +1,24 @@
+.participantContainer {
+  position: relative;
+}
+
+.participantContainer p {
+  background-color: #0b90aa;
+  color: #fff;
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+}
+
+video {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}

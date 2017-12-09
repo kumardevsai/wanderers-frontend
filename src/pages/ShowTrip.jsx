@@ -7,10 +7,12 @@ import SearchMap from '../components/SearchMap';
 import Chat from '../components/Chat';
 
 import { ChatBuddyList, ChatBuddyListItem } from '../elements/chat';
-import { VideoContainer, VideoBtn } from '../elements/video';
-import { Btn } from '../elements/button';
+import { VideoContainer } from '../elements/video';
+import { Btn, BlockBtn } from '../elements/button';
 
 import Video from 'twilio-video';
+import TripMenu from '../components/TripMenu';
+import PageTransition from '../components/PageTransition';
 
 @inject('WanderersStore', 'UiStore')
 @observer
@@ -40,12 +42,10 @@ export default class ShowTrip extends Component {
     participantName.innerText = `${participant.identity} 🎬`;
 
     participantContainer.appendChild(participantName);
-    this.container.appendChild(participantContainer);
+    this.container.prepend(participantContainer);
   };
 
-  initTwilioVideo = e => {
-    e.preventDefault();
-
+  initTwilioVideo = () => {
     // https://www.twilio.com/docs/api/video/javascript-v1-getting-started#2-get-an-api-key
     Video.connect(this.props.WanderersStore.videoToken, {
       name: this.props.WanderersStore.trip.uuid
@@ -101,57 +101,34 @@ export default class ShowTrip extends Component {
     }
 
     return (
-      <div>
-        <ChatBuddyList>
-          {WanderersStore.buddies.map(buddy => (
-            <ChatBuddyListItem key={buddy.id}>
-              <p>{buddy.name} </p>
-            </ChatBuddyListItem>
-          ))}
-        </ChatBuddyList>
-        <SearchMap />
-        {UiStore.showBuddyForm ? (
-          <BuddyForm />
-        ) : (
-          <Btn
-            className="btn"
-            onClick={e => {
-              e.preventDefault();
-              UiStore.showBuddyForm = true;
+      <PageTransition>
+        <div>
+          <MapGL />
+          <TripMenu initTwilioVideo={this.initTwilioVideo} />
+
+          <ChatBuddyList>
+            {WanderersStore.buddies.map(buddy => (
+              <ChatBuddyListItem key={buddy.id}>
+                <p>{buddy.name} </p>
+              </ChatBuddyListItem>
+            ))}
+          </ChatBuddyList>
+          <SearchMap />
+
+          {UiStore.showBuddyForm && <BuddyForm />}
+
+          <VideoContainer
+            style={{
+              display: this.props.UiStore.callInProgress ? 'block' : 'none'
             }}
+            innerRef={container => (this.container = container)}
           >
-            INVITE BUDDY
-          </Btn>
-        )}
+            <BlockBtn onClick={e => this.stopCall(e)}>Hang up</BlockBtn>
+          </VideoContainer>
 
-        <VideoContainer
-          style={{
-            display: this.props.UiStore.callInProgress ? 'block' : 'none'
-          }}
-          innerRef={container => (this.container = container)}
-        >
-          <VideoBtn onClick={e => this.stopCall(e)}>Hang up</VideoBtn>
-        </VideoContainer>
-
-        {UiStore.showChat ? (
-          <Chat />
-        ) : (
-          <Btn
-            className="btn"
-            onClick={e => {
-              e.preventDefault();
-              UiStore.showChat = true;
-            }}
-          >
-            CHAT
-          </Btn>
-        )}
-
-        <Btn onClick={e => this.initTwilioVideo(e)} className="btn">
-          Video Chat
-        </Btn>
-        <MapGL />
-      </div>
+          {UiStore.showChat && <Chat />}
+        </div>
+      </PageTransition>
     );
   }
 }
