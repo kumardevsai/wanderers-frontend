@@ -24,7 +24,7 @@ export default class NewTrip extends Component {
       this.nameInput.value
     );
     //  redirect when you get the trip
-    this.props.history.push(`/trips/${newTrip.id}`);
+    this.props.history.push(`/trips/${newTrip.uuid}`);
   };
 
   render() {

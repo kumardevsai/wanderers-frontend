@@ -18,8 +18,8 @@ import PageTransition from '../components/PageTransition';
 @observer
 export default class ShowTrip extends Component {
   componentWillMount() {
-    const tripId = this.props.match.params.id;
-    this.props.WanderersStore.loadTrip(tripId);
+    const tripUuid = this.props.match.params.uuid;
+    this.props.WanderersStore.loadTrip(tripUuid);
   }
 
   componentDidMount() {

@@ -33,9 +33,9 @@ class App extends Component {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/places" component={Places} />
                 <Route exact path="/trips/new" component={NewTrip} />
-                <Route exact path="/trips/:id" component={ShowTrip} />
+                <Route exact path="/trips/:uuid" component={ShowTrip} />
                 <Route exact path="/trips" component={TripsListing} />
-                <Route exact path="/trips/:id/join" component={JoinTrip} />
+                <Route exact path="/trips/:uuid/join" component={JoinTrip} />
                 <Route exact path="/logout" component={Logout} />
               </Switch>
             </div>

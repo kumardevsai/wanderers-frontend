@@ -64,8 +64,8 @@ export default class TripsListing extends Component {
 
     this.props.WanderersStore.trip = trip;
 
-    this.props.WanderersStore.loadTripImages(trip.id);
-    await this.props.WanderersStore.loadStops(trip.id);
+    this.props.WanderersStore.loadTripImages(trip.uuid);
+    await this.props.WanderersStore.loadStops(trip.uuid);
     this.preloadImages();
 
     this.scene = new Scene(
@@ -168,7 +168,7 @@ export default class TripsListing extends Component {
             <TripsList>
               {trips.map(trip => {
                 return (
-                  <TripsListItem key={trip.id}>
+                  <TripsListItem key={trip.uuid}>
                     <TripName>{trip.name}</TripName>
                     <TripIcon
                       src="/view.svg"
@@ -179,7 +179,7 @@ export default class TripsListing extends Component {
                         UiStore.showSelected = 'stops';
                       }}
                     />
-                    <Link to={`/trips/${trip.id}`}>
+                    <Link to={`/trips/${trip.uuid}`}>
                       <TripIcon src="/world.svg" alt="map icon" />
                     </Link>
                     <TripIcon

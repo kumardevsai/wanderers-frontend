@@ -17,7 +17,7 @@ import { Btn } from '../elements/button';
 export default class TripImageForm extends Component {
   static propTypes = {
     trip: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      uuid: PropTypes.string.isRequired,
       completed_at: PropTypes.string,
       completed: PropTypes.bool.isRequired,
       rating: PropTypes.number
@@ -27,7 +27,7 @@ export default class TripImageForm extends Component {
   uploadImage = e => {
     e.preventDefault();
     this.props.WanderersStore.addTripImage(
-      this.props.trip.id,
+      this.props.trip.uuid,
       this.imageInput.files[0],
       this.captionInput.value
     );

@@ -9,8 +9,8 @@ export default class JoinTrip extends Component {
   componentWillMount() {
     if (this.props.WanderersStore.user) {
       // post to buddies create to create buddy record for user for trip
-      const tripId = this.props.match.params.id;
-      this.props.WanderersStore.joinTrip(tripId, this.props.history);
+      const tripUuid = this.props.match.params.uuid;
+      this.props.WanderersStore.joinTrip(tripUuid, this.props.history);
     } else {
       // save in session storage where user wanted to go
       sessionStorage.setItem('url-after-login', this.props.location.pathname);

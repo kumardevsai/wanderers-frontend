@@ -106,16 +106,16 @@ class WanderersStore {
   };
 
   @action
-  loadTrip = async id => {
-    const response = await this.placesApi.loadTrip(this.user.token, id);
+  loadTrip = async uuid => {
+    const response = await this.placesApi.loadTrip(this.user.token, uuid);
     // set trip when response is back
     this.trip = response.data;
-    this.setupSubscription(id);
-    this.loadMessages(id);
-    this.loadBuddies(id);
-    this.loadTripImages(id);
-    await this.loadVideoToken(id);
-    await this.loadStops(id);
+    this.setupSubscription(uuid);
+    this.loadMessages(uuid);
+    this.loadBuddies(uuid);
+    this.loadTripImages(uuid);
+    await this.loadVideoToken(uuid);
+    await this.loadStops(uuid);
 
     if (this.stops.length > 0) {
       this.searchPlaces(
@@ -133,23 +133,23 @@ class WanderersStore {
 
   @action
   sendInvitation = async email => {
-    await this.placesApi.sendInvitation(this.user.token, email, this.trip.id);
+    await this.placesApi.sendInvitation(this.user.token, email, this.trip.uuid);
   };
 
   // call to placesApi to create buddy
   @action
-  joinTrip = async (tripId, history) => {
-    await this.placesApi.joinTrip(this.user.token, tripId);
-    history.push(`/trips/${tripId}`);
+  joinTrip = async (tripUuid, history) => {
+    await this.placesApi.joinTrip(this.user.token, tripUuid);
+    history.push(`/trips/${tripUuid}`);
   };
 
   // Real time stuff events for chat and stop
   @action
-  setupSubscription = tripId => {
+  setupSubscription = tripUuid => {
     this.subscription = this.cable.subscriptions.create(
       {
         channel: 'TripChannel',
-        trip_id: tripId
+        trip_uuid: tripUuid
       },
       {
         // comes from talk method in trip channel
@@ -195,34 +195,44 @@ class WanderersStore {
   };
 
   @action
-  loadMessages = async tripId => {
-    const response = await this.placesApi.loadMessages(this.user.token, tripId);
+  loadMessages = async tripUuid => {
+    const response = await this.placesApi.loadMessages(
+      this.user.token,
+      tripUuid
+    );
     this.messages = response.data;
   };
 
   @action
-  loadBuddies = async tripId => {
-    const response = await this.placesApi.loadBuddies(this.user.token, tripId);
+  loadBuddies = async tripUuid => {
+    const response = await this.placesApi.loadBuddies(
+      this.user.token,
+      tripUuid
+    );
     this.buddies = response.data;
   };
 
   @action
   addStopToTrip = async placeId => {
-    await this.placesApi.addStopToTrip(this.user.token, this.trip.id, placeId);
+    await this.placesApi.addStopToTrip(
+      this.user.token,
+      this.trip.uuid,
+      placeId
+    );
   };
 
   @action
   removeStopFromTrip = async stopId => {
     await this.placesApi.removeStopFromTrip(
       this.user.token,
-      this.trip.id,
+      this.trip.uuid,
       stopId
     );
   };
 
   @action
-  loadStops = async tripId => {
-    const response = await this.placesApi.loadStops(this.user.token, tripId);
+  loadStops = async tripUuid => {
+    const response = await this.placesApi.loadStops(this.user.token, tripUuid);
     this.stops = response.data;
   };
 
@@ -237,7 +247,7 @@ class WanderersStore {
       return arrTrip;
     });
 
-    await this.placesApi.updateTrip(this.user.token, trip.id, {
+    await this.placesApi.updateTrip(this.user.token, trip.uuid, {
       completed_at: completed ? new Date() : null
     });
   };
@@ -253,25 +263,25 @@ class WanderersStore {
       return arrTrip;
     });
 
-    await this.placesApi.updateTrip(this.user.token, trip.id, {
+    await this.placesApi.updateTrip(this.user.token, trip.uuid, {
       rating: rating
     });
   };
 
   @action
-  loadVideoToken = async tripId => {
+  loadVideoToken = async tripUuid => {
     const response = await this.placesApi.loadVideoToken(
       this.user.token,
-      tripId
+      tripUuid
     );
     this.videoToken = response.data.token;
   };
 
   @action
-  addTripImage = async (tripId, image, caption) => {
+  addTripImage = async (tripUuid, image, caption) => {
     const response = await this.placesApi.addTripImage(
       this.user.token,
-      tripId,
+      tripUuid,
       image,
       caption
     );
@@ -279,10 +289,10 @@ class WanderersStore {
   };
 
   @action
-  loadTripImages = async tripId => {
+  loadTripImages = async tripUuid => {
     const response = await this.placesApi.loadTripImages(
       this.user.token,
-      tripId
+      tripUuid
     );
     this.tripImages = response.data;
   };

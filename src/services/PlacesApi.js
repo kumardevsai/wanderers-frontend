@@ -42,17 +42,17 @@ export default class PlacesApi {
     );
   };
 
-  loadTrip = (user_token, id) => {
-    return this.api.get(`/trips/${id}`, {}, this.headers(user_token));
+  loadTrip = (user_token, uuid) => {
+    return this.api.get(`/trips/${uuid}`, {}, this.headers(user_token));
   };
 
   loadTrips = user_token => {
     return this.api.get(`/trips`, {}, this.headers(user_token));
   };
 
-  sendInvitation = (user_token, email, trip_id) => {
+  sendInvitation = (user_token, email, tripUuid) => {
     return this.api.post(
-      `/trips/${trip_id}/invitations`,
+      `/trips/${tripUuid}/invitations`,
       {
         email
       },
@@ -60,77 +60,81 @@ export default class PlacesApi {
     );
   };
 
-  joinTrip = (user_token, tripId) => {
+  joinTrip = (user_token, tripUuid) => {
     return this.api.post(
-      `/trips/${tripId}/buddies`,
+      `/trips/${tripUuid}/buddies`,
       {},
       this.headers(user_token)
     );
   };
 
-  loadMessages = (user_token, tripId) => {
+  loadMessages = (user_token, tripUuid) => {
     return this.api.get(
-      `/trips/${tripId}/messages`,
+      `/trips/${tripUuid}/messages`,
       {},
       this.headers(user_token)
     );
   };
 
-  loadBuddies = (user_token, tripId) => {
+  loadBuddies = (user_token, tripUuid) => {
     return this.api.get(
-      `/trips/${tripId}/buddies`,
+      `/trips/${tripUuid}/buddies`,
       {},
       this.headers(user_token)
     );
   };
 
-  addStopToTrip = (user_token, tripId, placeId) => {
+  addStopToTrip = (user_token, tripUuid, placeId) => {
     return this.api.post(
-      `/trips/${tripId}/stops`,
+      `/trips/${tripUuid}/stops`,
       { place_id: placeId },
       this.headers(user_token)
     );
   };
 
-  removeStopFromTrip = (user_token, tripId, stopId) => {
+  removeStopFromTrip = (user_token, tripUuid, stopId) => {
     return this.api.delete(
-      `/trips/${tripId}/stops/${stopId}`,
+      `/trips/${tripUuid}/stops/${stopId}`,
       {},
       this.headers(user_token)
     );
   };
 
-  loadStops = (user_token, tripId) => {
-    return this.api.get(`/trips/${tripId}/stops`, {}, this.headers(user_token));
-  };
-
-  updateTrip = (user_token, tripId, fields) => {
-    return this.api.put(`/trips/${tripId}`, fields, this.headers(user_token));
-  };
-
-  loadVideoToken = (user_token, tripId) => {
+  loadStops = (user_token, tripUuid) => {
     return this.api.get(
-      `/trips/${tripId}/video_token`,
+      `/trips/${tripUuid}/stops`,
       {},
       this.headers(user_token)
     );
   };
 
-  addTripImage = (user_token, tripId, image, caption) => {
+  updateTrip = (user_token, tripUuid, fields) => {
+    return this.api.put(`/trips/${tripUuid}`, fields, this.headers(user_token));
+  };
+
+  loadVideoToken = (user_token, tripUuid) => {
+    return this.api.get(
+      `/trips/${tripUuid}/video_token`,
+      {},
+      this.headers(user_token)
+    );
+  };
+
+  addTripImage = (user_token, tripUuid, image, caption) => {
     const formData = new FormData();
     formData.append('trip_image[caption]', caption);
     formData.append('trip_image[image]', image);
 
     return this.api.post(
-      `/trips/${tripId}/trip_images`,
+      `/trips/${tripUuid}/trip_images`,
       formData,
       this.headers(user_token)
     );
   };
 
-  loadTripImages = (user_token, tripId) => {
+  loadTripImages = (user_token, tripUuid) => {
     return this.api.get(
-      `/trips/${tripId}/trip_images`,
+      `/trips/${tripUuid}/trip_images`,
       {},
       this.headers(user_token)
     );
