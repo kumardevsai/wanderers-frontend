@@ -27,7 +27,7 @@ export default class SearchMap extends Component {
 
     return (
       <SearchContainer>
-        <Select ref={select => (this.select = select)}>
+        <Select innerRef={select => (this.select = select)}>
           <option value="">All</option>
           {types.map(type => (
             <option key={type.key} value={type.key}>

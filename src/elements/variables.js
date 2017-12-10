@@ -11,6 +11,7 @@ export const colors = {
   offwhite: '#FFFCEC',
   salmon: '#E94C6F',
   pink: '#6F3662',
+  violet: '#9068be',
   yellow: '#F2C640'
 };
 
@@ -38,7 +39,7 @@ export const padding = {
 };
 
 export const fonts = {
-  h1Heading: 'Lato, sans-serif',
+  h1Heading: 'Gruppo, cursive',
   nav: 'Heebo, sans-serif',
   headings: 'Heebo, sans-serif',
   body: 'Heebo, sans-serif'

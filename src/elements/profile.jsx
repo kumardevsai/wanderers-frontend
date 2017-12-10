@@ -62,8 +62,24 @@ const TripName = styled.p`
   text-align: center;
   margin: 0 auto;
   margin-top: 25px;
-  color: ${colors.white};
+  color: ${colors.violet};
   text-transform: uppercase;
+`;
+
+const TripNameVisual = styled.h2`
+  color: ${colors.salmon};
+  font-family: ${fonts.h1Heading};
+  font-weight: bold;
+  font-size: ${fontSizes.medium};
+  position: absolute;
+  bottom: 25px;
+  left: 8vw;
+  padding: 0px;
+  margin: 0px;
+
+  @media (max-width: 1296px) {
+    top: 25px;
+  }
 `;
 
 const TripLink = styled(Link)`
@@ -97,6 +113,7 @@ export {
   TripsList,
   TripsListItem,
   TripName,
+  TripNameVisual,
   TripLink,
   TripIcon
 };

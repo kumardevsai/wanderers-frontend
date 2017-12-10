@@ -9,6 +9,7 @@ import {
   TripsList,
   TripsListItem,
   TripName,
+  TripNameVisual,
   TripIcon
 } from '../elements/profile';
 
@@ -163,30 +164,6 @@ export default class TripsListing extends Component {
 
           <TripVisualization innerRef={section => (this.section = section)} />
 
-          {UiStore.visualImageVisible && stop ? (
-            <div
-              style={{
-                position: 'absolute',
-                top: UiStore.visualImagePositionY,
-                left: UiStore.visualImagePositionX
-              }}
-            >
-              <Figure>
-                <CardImg
-                  src={
-                    stop.place.place_images.length > 0
-                      ? stop.place.place_images[0].card_image
-                      : '/noimg.jpg'
-                  }
-                  alt={stop.place.name}
-                />
-                <Figcaption>{stop.place.name.toUpperCase()}</Figcaption>
-              </Figure>
-            </div>
-          ) : (
-            ''
-          )}
-
           <UserTrips>
             <TripsList>
               {trips.map(trip => {
@@ -221,6 +198,34 @@ export default class TripsListing extends Component {
               })}
             </TripsList>
           </UserTrips>
+
+          {WanderersStore.trip && (
+            <TripNameVisual>{WanderersStore.trip.name}</TripNameVisual>
+          )}
+
+          {UiStore.visualImageVisible && stop ? (
+            <div
+              style={{
+                position: 'absolute',
+                top: UiStore.visualImagePositionY,
+                left: UiStore.visualImagePositionX
+              }}
+            >
+              <Figure>
+                <CardImg
+                  src={
+                    stop.place.place_images.length > 0
+                      ? stop.place.place_images[0].card_image
+                      : '/noimg.jpg'
+                  }
+                  alt={stop.place.name}
+                />
+                <Figcaption>{stop.place.name.toUpperCase()}</Figcaption>
+              </Figure>
+            </div>
+          ) : (
+            ''
+          )}
         </ProfilePage>
       </PageTransition>
     );

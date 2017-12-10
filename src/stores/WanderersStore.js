@@ -37,6 +37,7 @@ class WanderersStore {
     const session_user = sessionStorage.getItem('user');
     if (session_user) {
       this.user = JSON.parse(session_user);
+      this.setupUserSubscription();
     }
 
     if (this.user) {
@@ -80,7 +81,7 @@ class WanderersStore {
   searchPlaces = async (lat, lon, type = '') => {
     this.viewport.latitude = lat;
     this.viewport.longitude = lon;
-    this.viewport.zoom = 16;
+    this.viewport.zoom = 12;
 
     const response = await this.placesApi.search(
       this.user.token,
@@ -163,6 +164,26 @@ class WanderersStore {
         }
       }
     );
+  };
+
+  @action
+  setupUserSubscription = () => {
+    if (this.user) {
+      this.userSubscription = this.cable.subscriptions.create(
+        {
+          channel: 'UserChannel',
+          user_token: this.user.token
+        },
+        {
+          received: ({ type, data }) => {
+            console.log(type, data);
+            if (type === 'new_place') {
+              this.places.push(data);
+            }
+          }
+        }
+      );
+    }
   };
 
   @action
