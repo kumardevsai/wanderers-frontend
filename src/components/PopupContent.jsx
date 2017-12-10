@@ -5,10 +5,6 @@ import { Figure, CardImg, Figcaption } from '../elements/figure';
 
 import PopupAction from './PopupAction';
 
-import { observer, inject } from 'mobx-react';
-
-@inject('WanderersStore')
-@observer
 export default class PopupContent extends Component {
   static propTypes = {
     place: PropTypes.object.isRequired

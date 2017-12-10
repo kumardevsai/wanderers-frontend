@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders nav for authenticated user 1`] = `
+<div
+  class="sc-bdVaJa hlxeFr"
+>
+  <nav
+    class="sc-bwzfXH efklKu"
+  >
+    <ul
+      class="sc-htpNat gydiuv"
+    >
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/"
+        >
+          HOME
+        </a>
+      </li>
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/trips/new"
+        >
+          PLAN TRIP
+        </a>
+      </li>
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/trips"
+        >
+          MY TRIPS
+        </a>
+      </li>
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/places"
+        >
+          MAP
+        </a>
+      </li>
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/logout"
+        >
+          LOG OUT
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
+
+exports[`renders nav for unauthenticated user 1`] = `
+<div
+  class="sc-bdVaJa hlxeFr"
+>
+  <nav
+    class="sc-bwzfXH efklKu"
+  >
+    <ul
+      class="sc-htpNat gydiuv"
+    >
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/"
+        >
+          HOME
+        </a>
+      </li>
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/signup"
+        >
+          SIGN UP
+        </a>
+      </li>
+      <li
+        class="sc-bxivhb dWbHYm"
+      >
+        <a
+          class="sc-ifAKCX iFVAIq"
+          href="/login"
+        >
+          LOGIN
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

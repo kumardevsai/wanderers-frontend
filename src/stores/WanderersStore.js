@@ -173,21 +173,25 @@ class WanderersStore {
         trip_uuid: tripUuid
       },
       {
-        // comes from talk method in trip channel
-        received: ({ type, data }) => {
-          if (type === 'new_message') {
-            this.messages.push(data);
-          } else if (type === 'new_stop') {
-            this.stops.push(data);
-            this.notify('New Stop Added! 🛵');
-          } else if (type === 'remove_stop') {
-            this.stops = this.stops.filter(stop => stop.id !== data);
-          } else if (type === 'video_join') {
-            this.notify(`${data.user_name} has joined the video chat 🤘`);
-          }
-        }
+        received: this.conditionalBroadcast
       }
     );
+  };
+
+  @action
+  conditionalBroadcast = ({ type, data }) => {
+    // new message comes from talk method in trip channel
+    if (type === 'new_message') {
+      this.messages.push(data);
+    } else if (type === 'new_stop') {
+      this.stops.push(data);
+      this.notify('New Stop Added! 🛵');
+    } else if (type === 'remove_stop') {
+      this.stops = this.stops.filter(stop => stop.id !== data);
+      this.notify('Stop Removed! 🙀');
+    } else if (type === 'video_join') {
+      this.notify(`${data.user_name} has joined the video chat 🤘`);
+    }
   };
 
   @action

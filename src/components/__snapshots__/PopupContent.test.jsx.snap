@@ -2,11 +2,16 @@
 
 exports[`displays place popup without an image 1`] = `
 <figure
-  class="sc-bdVaJa dMJDoW"
+  class="sc-bdVaJa kBeBlx"
 >
+  <img
+    alt="Fake place"
+    class="sc-bwzfXH iOZTkB"
+    src="/noimg.jpg"
+  />
   <hr />
   <figcaption
-    class="sc-htpNat ihWVmF"
+    class="sc-htpNat iyKyYd"
   >
     FAKE PLACE
   </figcaption>
