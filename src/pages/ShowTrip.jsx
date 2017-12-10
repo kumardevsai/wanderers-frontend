@@ -51,6 +51,10 @@ export default class ShowTrip extends Component {
   };
 
   initTwilioVideo = () => {
+    if (this.props.UiStore.callInProgress) {
+      return;
+    }
+
     // https://www.twilio.com/docs/api/video/javascript-v1-getting-started#2-get-an-api-key
     Video.connect(this.props.WanderersStore.videoToken, {
       name: this.props.WanderersStore.trip.uuid
@@ -81,6 +85,8 @@ export default class ShowTrip extends Component {
           const participantContainer = document.getElementById(participant.sid);
           participantContainer.remove();
         });
+
+        this.props.WanderersStore.notifyVideoJoin();
       },
       error => {
         console.error('Unable to connect to Room: ' + error.message);
@@ -95,6 +101,10 @@ export default class ShowTrip extends Component {
     this.room.disconnect();
     this.room = null;
     this.props.UiStore.callInProgress = false;
+
+    document.querySelectorAll('.participantContainer').forEach(container => {
+      container.remove();
+    });
   };
 
   render() {

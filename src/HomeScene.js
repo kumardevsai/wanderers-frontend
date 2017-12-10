@@ -48,7 +48,7 @@ export default class HomeScene {
         vec3 light = vec3( 1.0 );
         light = normalize( light );
         float directional = max( dot( vNormal, light ), 0.0 );
-        gl_FragColor = vec4( ( directional + ambient ) * vColor, 1.0 );
+        gl_FragColor = vec4( ( directional + ambient ) * vColor, 0.9 );
       }
     `;
   }
@@ -110,10 +110,6 @@ export default class HomeScene {
 
     for (var f = 0; f < numFaces; f++) {
       const index = 9 * f;
-      // const h = 0.2 * Math.random();
-      // const s = 0.5 + 0.5 * Math.random();
-      // const l = 0.5 + 0.5 * Math.random();
-      // color.setHSL( h, s, l );
       const randomColour =
         colourOptions[Math.floor(colourOptions.length * Math.random())];
       color.set(randomColour);

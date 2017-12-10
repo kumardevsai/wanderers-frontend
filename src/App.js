@@ -6,6 +6,7 @@ import WanderersStore from './stores/WanderersStore';
 import UiStore from './stores/UiStore';
 import Home from './pages/Home';
 import Nav from './components/Nav';
+import Notification from './components/Notification';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Places from './pages/Places';
@@ -24,6 +25,7 @@ class App extends Component {
     return (
       <Provider WanderersStore={WanderersStore} UiStore={UiStore}>
         <AppContainer>
+          <Notification />
           <BrowserRouter>
             <div>
               <Nav />

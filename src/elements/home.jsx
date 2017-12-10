@@ -35,10 +35,10 @@ const Heading1 = styled.h1`
   font-size: 9rem;
   font-family: ${fonts.h1Heading};
   padding: $spacing-small;
-  ${'' /* color: ${colors.offwhite}; */} text-shadow: 3px 3px ${colors.black};
+  text-shadow: 3px 3px ${colors.black};
   position: absolute;
   margin: 0 auto;
-  color: ${colors.violet};
+  color: #866667;
 
   @media (max-width: 1296px) {
     font-size: 4rem;

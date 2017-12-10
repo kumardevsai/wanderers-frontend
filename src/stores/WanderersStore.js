@@ -26,6 +26,8 @@ class WanderersStore {
   @observable stops = [];
   @observable videoToken = null;
   @observable tripImages = [];
+  @observable notification = null;
+  @observable showNotification = false;
 
   constructor() {
     this.authApi = new AuthApi();
@@ -75,6 +77,24 @@ class WanderersStore {
   logout = () => {
     sessionStorage.clear();
     this.user = null;
+  };
+
+  @action
+  notify = str => {
+    this.notification = str;
+    this.showNotification = true;
+
+    setTimeout(() => {
+      this.showNotification = false;
+    }, 3000);
+  };
+
+  @action
+  notifyVideoJoin = () => {
+    this.subscription.perform('video_join', {
+      user_id: this.user.id,
+      user_name: this.user.name
+    });
   };
 
   @action
@@ -134,6 +154,7 @@ class WanderersStore {
   @action
   sendInvitation = async email => {
     await this.placesApi.sendInvitation(this.user.token, email, this.trip.uuid);
+    this.notify('Message sent! ✉️');
   };
 
   // call to placesApi to create buddy
@@ -158,8 +179,11 @@ class WanderersStore {
             this.messages.push(data);
           } else if (type === 'new_stop') {
             this.stops.push(data);
+            this.notify('New Stop Added! 🛵');
           } else if (type === 'remove_stop') {
             this.stops = this.stops.filter(stop => stop.id !== data);
+          } else if (type === 'video_join') {
+            this.notify(`${data.user_name} has joined the video chat 🤘`);
           }
         }
       }
@@ -286,6 +310,7 @@ class WanderersStore {
       caption
     );
     this.tripImages.push(response.data);
+    this.notify('Image added! 📷');
   };
 
   @action

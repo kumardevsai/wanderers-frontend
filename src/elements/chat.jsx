@@ -20,7 +20,7 @@ const ChatArea = styled.div`
 
 const MessagesContainer = styled.div`
   background-color: ${colors.white};
-  margin-bottom: ${margin.mini};
+  margin-bottom: ${margin.small};
   padding: ${margin.mini};
   font-family: ${fonts.body};
   color: ${colors.pink};
