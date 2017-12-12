@@ -22,7 +22,7 @@ const CardImg = styled.img`
 
 const Figcaption = styled.figcaption`
   color: ${colors.black};
-  text-align: left;
+  text-align: center;
   font-family: ${fonts.body};
   line-height: 20px;
   font-weight: bold;
