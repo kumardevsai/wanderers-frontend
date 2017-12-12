@@ -41,7 +41,6 @@ export default class BuddyForm extends Component {
 
           <ActionsContainer>
             <Btn type="submit">SEND</Btn>
-            <Btn>CANCEL</Btn>
           </ActionsContainer>
         </Form>
       </BuddyFormContainer>

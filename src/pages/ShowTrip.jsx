@@ -57,6 +57,7 @@ export default class ShowTrip extends Component {
 
     // https://www.twilio.com/docs/api/video/javascript-v1-getting-started#2-get-an-api-key
     Video.connect(this.props.WanderersStore.videoToken, {
+      // chat room you're trying to join
       name: this.props.WanderersStore.trip.uuid
     }).then(
       room => {
@@ -64,7 +65,7 @@ export default class ShowTrip extends Component {
         this.props.UiStore.callInProgress = true;
 
         console.log('Successfully joined a Room: ', room);
-        // people who were in the roon before you join
+        // people who were in the room before you join
         room.participants.forEach(participant => {
           this.newParticipant(participant);
         });
@@ -128,6 +129,7 @@ export default class ShowTrip extends Component {
               </ChatBuddyListItem>
             ))}
           </ChatBuddyList>
+
           <SearchMap />
 
           {UiStore.showBuddyForm && <BuddyForm />}

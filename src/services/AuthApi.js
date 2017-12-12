@@ -5,7 +5,7 @@ import Hosts from './Hosts';
 export default class AuthApi {
   constructor() {
     this.api = create({
-      // custom url (it has to redirect to facebook) -> atom /etc/hosts
+      // Hosts required for different environments
       baseURL: Hosts.authHost(),
       headers: {
         'Content-Type': 'application/json',

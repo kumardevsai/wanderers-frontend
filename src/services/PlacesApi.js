@@ -62,6 +62,7 @@ export default class PlacesApi {
 
   joinTrip = (user_token, tripUuid) => {
     return this.api.post(
+      //call to #create
       `/trips/${tripUuid}/buddies`,
       {},
       this.headers(user_token)

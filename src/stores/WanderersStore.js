@@ -183,6 +183,7 @@ class WanderersStore {
     // new message comes from talk method in trip channel
     if (type === 'new_message') {
       this.messages.push(data);
+      // make sure no duplicated messages
       this.messages = [...new Set([...this.messages])];
     } else if (type === 'new_stop') {
       this.stops.push(data);
